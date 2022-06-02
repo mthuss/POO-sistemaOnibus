@@ -5,7 +5,8 @@ public class Rotas {
     private Horario saida; //MENOR QUE A CHEGADA
     private Horario chegada; //MAIOR QUE A SAIDA
     private float valor;
-    private Onibus onibus = new Onibus();
+//    private Onibus onibus = new Onibus();
+    private Onibus onibus;
     private int numRota;
     
     public String getOrigem() {

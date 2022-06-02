@@ -9,6 +9,7 @@ public class Onibus {
     private int assentos[][] = new int[10][3];
  //   private ArrayList<Passageiro> passageiros = new ArrayList<>();
     private Motorista driver;
+    private int IDRota;
 
     //setters e getters
     public String getModelo() {
@@ -37,6 +38,12 @@ public class Onibus {
     }
     public void setQuilometragem(int quilometragem) {
         this.quilometragem = quilometragem;
+    }
+    public void setIDRota(int ID){
+	    this.IDRota = ID;
+    }
+    public int getIDRota(){
+    	return this.IDRota;
     }
 
 
@@ -74,6 +81,23 @@ public class Onibus {
       //Marca assento selecionado como ocupado
       this.assentos[i-1][j-1] = 1;
   }
+
+
+    public void dadosOnibus()
+    {
+      System.out.println("Realize o cadastro do ônibus: ");
+      System.out.print("Marca: ");
+      Scanner sc = new Scanner(System.in);
+      this.marca = sc.nextLine();
+      System.out.print("Modelo: ");
+      this.modelo = sc.nextLine();
+      System.out.print("Ano de fabricação: ");
+      this.anoFabri = sc.nextInt();
+      sc.nextLine();
+      System.out.print("Quilometragem: ");
+      this.quilometragem = sc.nextInt();
+    }
+
     //construtores
     public Onibus(String modelo, int anoFabri, String marca,
 int quilometragem, int assentos[][])    {

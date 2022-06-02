@@ -58,6 +58,8 @@ public class Passageiro {
   public Passageiro()   {
   }
 
+  //PASSAR ESSA FUNÇÃO PRO SISTEMA.JAVA DEPOIS
+  //ASSIM, PEGA TODOS OS DADOS E DEPOIS ENFIA NO CONSTRUTOR
   //Função que recebe dados do passageiro e cria um novo
   public void dadosPassageiro()
   {
@@ -65,8 +67,13 @@ public class Passageiro {
     System.out.print("Nome: ");
     Scanner sc = new Scanner(System.in);
     this.nome = sc.nextLine();
+
+    boolean repetido = false;
     System.out.print("CPF: ");
     this.documento = sc.nextLong();
+    for(int i = 0; i < passageiros.)
+
+
     System.out.print("Digite sua data de nascimento: \nDia: ");
     int D,M,A;
     D = sc.nextInt();

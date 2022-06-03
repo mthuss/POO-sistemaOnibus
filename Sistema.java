@@ -203,7 +203,7 @@ public class Sistema
 								pessoa.setNome(nome);
 								break;
 
-						case 2: System.out.print("\nData de nascimento: \nDia: ");
+						case 2: System.out.print("\nDigite a nova data de nascimento: \nDia: ");
 								int D,M,A;
 								D = sc.nextInt();
 								System.out.print("Mês: ");
@@ -215,7 +215,11 @@ public class Sistema
 								pessoa.setData(D, M, A);
 								break;
 
-						case 3:
+						case 3:	System.out.print("Digite o novo endereço: ");
+	    						String endereco = sc.nextLine();
+								pessoa.setEndereco(endereco);
+								break;
+
 
 						default: System.out.println("Valor invalido!\n"); break; 
 					}
@@ -229,6 +233,7 @@ public class Sistema
 		}
 	}
 
+//----------------------------------------------------------------------------
 	public static void menuUsuario()  {
 		int opt; //pra seleções numericas
 		String sn; //pra seleções de S/N
@@ -241,7 +246,8 @@ public class Sistema
 			System.out.println("4- Reservar passagem");
 			System.out.println("5- Cancelar passagem");
 			System.out.println("6- Alterar cadastro");
-			System.out.println("7- Voltar");
+			System.out.println("7- Mostrar Cadastro");
+			System.out.println("8- Voltar");
 			System.out.print("\nSeleção: ");
 
 			Scanner sc = new Scanner(System.in);
@@ -281,14 +287,29 @@ public class Sistema
 
 				case 6: alterarCadastro(); break;
 
+				case 7:
+						System.out.print("Digite seu CPF: ");
+						boolean encontrado = false;
+						long CPF2 = sc.nextLong();
+						for(int i = 0; i < passageiros.size(); i++)	{//Encontrar o passageiro que quer cancelar a passagem
+							if(passageiros.get(i).getDocumento() == CPF2) {
+								passageiros.get(i).imprimirDados();
+								encontrado = true;
+							}
+						}
+						if(!encontrado)
+							System.out.println("Usuario não encontrado !!!");
+						break;
+
 				default: System.out.println(); break;
 			}
 
 
-		}while(opt != 7);
+		}while(opt != 8);
+		passageiros.get(0).imprimirDados();
 	}
 
-
+//----------------------------------------------------------------------------
     //Funções do menuADM
     public static void cadastrarOnibus()
     {
@@ -329,6 +350,8 @@ public class Sistema
         
     }
 
+
+//----------------------------------------------------------------------------
 	public static void menuADM()  {
         int opt;
         do{

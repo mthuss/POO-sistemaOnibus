@@ -39,6 +39,7 @@ public class Main {
 				System.out.println("Opção inválida!");
 		}while(opt != 3);
 
+
 		// System.out.print(registro.passageiros);
 
 		  /*    SaintDeoclecian.reservarAssento();

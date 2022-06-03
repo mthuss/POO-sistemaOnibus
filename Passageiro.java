@@ -78,4 +78,13 @@ public class Passageiro {
 
   public Passageiro()   {
   }
+
+  public void imprimirDados()
+  {
+    System.out.println("Nome: " + this.nome);
+    System.out.println("CPF: " + this.documento);
+    System.out.println("Endereço: " + this.endereco);
+    System.out.println("Data de nascimento: " + this.nascData.getDia() + "/" + this.nascData.getMes() + "/" + this.nascData.getAno());
+    
+  }
 }

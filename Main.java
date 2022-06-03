@@ -18,7 +18,7 @@ public class Main {
 		//System.out.println(registro.getRotas().get(0).getDestino());
 
 		do  { 
-			System.out.println("Digite o tipo de usuário:");
+			System.out.println("\nDigite o tipo de usuário:");
 			System.out.println("1- Passageiro");
 			System.out.println("2- Administrador");
 			System.out.println("3- Sair");
@@ -33,7 +33,7 @@ public class Main {
 			}
 			if(opt < 1 || opt > 3)
 				System.out.println("Opção inválida!");
-		}while(opt < 1 || opt > 3);
+		}while(opt != 3);
 
 		// System.out.print(registro.passageiros);
 

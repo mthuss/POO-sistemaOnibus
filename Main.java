@@ -15,6 +15,9 @@ public class Main {
 		SaintDeoclecian.setIDRota(107);
 		SaintDeoclecian.setDestino("Sao Deocleciano");
 		registro.getRotas().add(SaintDeoclecian);
+		Onibus viacao = new Onibus("viadao esteroide",2002,"passaro marrom",100);
+		SaintDeoclecian.setOnibus(viacao);
+		SaintDeoclecian.setAtribBus(true);
 		//System.out.println(registro.getRotas().get(0).getDestino());
 
 		do  { 

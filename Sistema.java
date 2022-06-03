@@ -184,12 +184,46 @@ public class Sistema
 		int opt;
 		for(int i = 0; i < passageiros.size(); i++)	{//Encontrar o passageiro que quer cancelar a passagem
 			if(passageiros.get(i).getDocumento() == CPF) {
-				encontrado = true;
 				Passageiro pessoa = passageiros.get(i);
+				encontrado = true;
 				System.out.println("Cadastro encontrado!!\n");
-				//Passageiro pessoa = passageiros.get(i);
 
-			}	
+				do	{
+					System.out.println("\nQue dado deseja alterar?");
+					System.out.println("1- Alterar nome");
+					System.out.println("2- Alterar data de nascimento");
+					System.out.println("3- Alterar endereço");
+					System.out.print("Comando: ");
+					opt = sc.nextInt();
+				
+					switch(opt)	{
+						case 1: System.out.print("Digite o nome: ");
+								sc.nextLine();
+								String nome = sc.nextLine();
+								pessoa.setNome(nome);
+								break;
+
+						case 2: System.out.print("\nData de nascimento: \nDia: ");
+								int D,M,A;
+								D = sc.nextInt();
+								System.out.print("Mês: ");
+								M = sc.nextInt();
+								System.out.print("Ano: ");
+								A = sc.nextInt();
+								Data nascData = new Data(D,M,A);
+								sc.nextLine();
+
+						case 3:
+
+						default: System.out.println("Valor invalido!\n"); break; 
+					}
+				} while (opt < 1 || opt > 3);
+			}
+		}
+	
+		if(!encontrado) {
+			
+			System.out.println("Cadastro não encontrado!");
 		}
 	}
 
@@ -273,6 +307,12 @@ public class Sistema
             if(rotas.get(i).getIDRota() == ID)
             {
               encontrado = true;
+			  Rotas rota = rotas.get(i);
+			  if(rota.getAtribBus())
+			  {
+				  System.out.println("Esta rota já possui um onibus atribuido"); 
+				  return;
+			  }
               rotas.get(i).setOnibus(bus);
               bus.setIDRota(ID);
               if(rotas.get(i).getOnibus() == bus)

@@ -105,12 +105,11 @@ public class Onibus {
 
     //construtores
     public Onibus(String modelo, int anoFabri, String marca,
-int quilometragem, int assentos[][])    {
+int quilometragem)    {
         this.modelo = modelo;
         this.anoFabri = anoFabri;
         this.marca = marca;
         this.quilometragem = quilometragem;
-        this.assentos = assentos;
     }
 
     public Onibus() {

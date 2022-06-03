@@ -69,6 +69,7 @@ public class Sistema
 	
 	public static void reservarPassagem()
 	{
+		int i,j;
 		String sn = "n"; //prompt de confirmação da linha
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Digite seu CPF: ");
@@ -77,7 +78,7 @@ public class Sistema
 
 		//Verifica se o CPF digitado está, de fato, cadastrado
 		//e reserva a linha pedida
-		for(int i = 0; i < passageiros.size(); i++)
+		for(i = 0; i < passageiros.size(); i++)
 			if(passageiros.get(i).getDocumento() == CPF)
 			{
 				System.out.println("Encontrado!");
@@ -89,7 +90,7 @@ public class Sistema
 				do{  //laço de verificação "deseja reservar MESMO essa linha?"
 					System.out.println("Deseja reservar qual ônibus?\nDigite o número da linha:");
 					numlinha = sc.nextInt(); //Lê o numero da linha a ser reservada
-					for(int j = 0; j < rotas.size(); j++)
+					for(j = 0; j < rotas.size(); j++)
 						if(rotas.get(j).getIDRota() == numlinha)
 						{
 							Onibus bus = rotas.get(j).getOnibus();
@@ -99,12 +100,18 @@ public class Sistema
 							sc.nextLine();
 							sn = sc.nextLine();
 
-							if (sn.contains("s") || sn.contains("S"))  { 
-								bus.reservarAssento();
+							if (sn.contains("s") || sn.contains("S"))  
+							{ 
+								System.out.println("Teste!!");
+								bus.reservarAssento(pessoa);
+								pessoa.setReservado(true);
+								System.out.println("Reservado");
 								pessoa.setLinha(numlinha);
+
+								System.out.println("Linha definida");
+								break;
 							}
 
-							break;
 						}
 				}  while (sn.contains("n") || sn.contains("N"));  
 			}
@@ -115,6 +122,45 @@ public class Sistema
 
 	}
 
+	public static void cancelarPassagem()
+	{
+		System.out.print("Cancelar passagem\n\nDigite seu CPF: ");
+		Scanner sc = new Scanner(System.in);
+		long CPF = sc.nextLong();
+
+		boolean encontrado = false;
+//		boolean rotaExiste = false; //Pra caso a rota a qual a pessoa estava atrelada tiver sido deletada
+
+		for(int i = 0; i < passageiros.size(); i++) //Encontrar o passageiro que quer cancelar a passagem
+			if(passageiros.get(i).getDocumento() == CPF)
+			{
+				encontrado = true;
+				Passageiro pessoa = passageiros.get(i);
+				
+				if(pessoa.getReservado()) //Só cancela se a pessoa tiver, de fato, alguma passagem reservada
+				{
+					int ID = pessoa.getLinha();
+					int pos[] = pessoa.getAssento();
+					pessoa.setLinha(0); //Desvincula linha da pessoa
+					//System.out.println(pos[0] + "\n" + pos[1]);
+					for(int j = 0; j < rotas.size(); j++)	//Encontra o onibus da rota do passageiro
+						if(rotas.get(j).getIDRota() == ID)
+						{
+							//rotaExiste = true;
+							rotas.get(j).getOnibus().cancelarAssento(pos[0],pos[1]);
+							pessoa.setReservado(false);
+							break;
+						}
+				}
+				else System.out.println("Este usuário não possui nenhuma passagem reservada");
+				break;	
+			}
+
+		if(!encontrado)
+			System.out.println("Não existe usuário registrado com esse CPF");
+
+
+	}
 
     public static void imprimirRotas()
     {
@@ -126,11 +172,7 @@ public class Sistema
                 System.out.println(rotas.get(i).getIDRota() + " - " + rotas.get(i).getDestino());
         }
     }
-	/*	public void reservarPassagem(long CPF)
-		{
-		Scanner sc = new Scanner(System.in);
-		}
-	 */	
+
 	public static void menuUsuario()  {
 		int opt; //pra seleções numericas
 		String sn; //pra seleções de S/N
@@ -141,7 +183,7 @@ public class Sistema
 			System.out.println("2- Remover usuário");
 			System.out.println("3- Mostrar linhas");
 			System.out.println("4- Reservar passagem");
-			System.out.println("5- Mostrar rotas disponíveis");
+			System.out.println("5- Cancelar passagem");
 			System.out.println("6- Voltar");
 			System.out.print("\nSeleção: ");
 
@@ -162,7 +204,7 @@ public class Sistema
 						sn = sc.nextLine();
 						if(sn.contains("S") || sn.contains("s"))
 						{
-							reservarPassagem();
+							reservarPassagem(); break;
 						}
 						else if(sn.contains("n") || sn.contains("N"))
 						{
@@ -170,7 +212,10 @@ public class Sistema
 							System.out.println("Tente reservar novamente com sua conta recém-criada");
 						}
 						else System.out.println("Opção inválida!");
-					}while(!sn.contains("S") && !sn.contains("s") && !sn.contains("n") && !sn.contains("N")); break;
+					}while(!sn.contains("S") && !sn.contains("s") && !sn.contains("n") && !sn.contains("N")); 
+					break;
+				
+				case 5: cancelarPassagem(); break;
 
 				default: break;
 			}

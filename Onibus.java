@@ -58,7 +58,7 @@ public class Onibus {
       }
     }
 
-  public void reservarAssento()
+  public void reservarAssento(Passageiro pessoa) //recebe pessoa pra que possa registar o local do assento no objeto pessoa
   {
     int i,j;
     System.out.println("Assentos disponiveis: ");
@@ -79,10 +79,14 @@ public class Onibus {
       }while(i <= 0 || i > 10 || j <= 0 || j > 3 || this.assentos[i-1][j-1] == 1);
 
       //Marca assento selecionado como ocupado
+      pessoa.setAssento(i-1,j-1); //Designa o assento da pessoa
       this.assentos[i-1][j-1] = 1;
   }
 
-
+  public void cancelarAssento(int i, int j)
+  {
+    this.assentos[i][j] = 0;
+  }
     public void dadosOnibus()
     {
       System.out.println("Realize o cadastro do ônibus: ");

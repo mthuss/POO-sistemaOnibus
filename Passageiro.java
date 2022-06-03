@@ -5,8 +5,9 @@ public class Passageiro {
   private String nome;
   private Data nascData;
   private String endereco;
-  private int lugar[] = new int[2];
+  private int assento[] = new int[2];
   private int numLinha;
+  private boolean reservado = false;
 
   //Getters e Setters
   public void setDocumento(long doc)  {
@@ -39,14 +40,34 @@ public class Passageiro {
   public String getEndereco()  {
     return (this.endereco);
   }
-    public void setLinha(int linha){
-	this.numLinha = linha;
+    public void setLinha(int ID){
+	    this.numLinha = ID;
     }
 
     public int getLinha(){
 	return this.numLinha;
     }
 
+  public int[] getAssento()
+  {
+    return this.assento;
+  }
+
+  public void setAssento(int i,int j)
+  {
+    this.assento[0] = i;
+    this.assento[1] = j;
+  }
+
+  public void setReservado(boolean status)
+  {
+    this.reservado = status;
+  }
+
+  public boolean getReservado()
+  {
+    return this.reservado;
+  }
   //Construtores
   public Passageiro(long documento, String nome, Data data, String endereco)  {
     this.documento = documento;

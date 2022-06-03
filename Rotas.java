@@ -8,6 +8,7 @@ public class Rotas {
     private Onibus onibus = new Onibus(); //Nota: PRECISA SER ASSIM!!
 //    private Onibus onibus; //E NÃO ASSIM!!
     private int numRota;
+    private boolean onibusAtribuido = false;
     
     public String getOrigem() {
         return origem;
@@ -64,7 +65,14 @@ public class Rotas {
     	return this.numRota;
     }
 
-
+    public void setAtribBus(boolean status)
+    {
+        this.onibusAtribuido = status;
+    }
+    public boolean getAtribBus()
+    {
+        return this.onibusAtribuido;
+    }
   //construtores
     public Rotas(String origem, String parada, String destino, Horario saida, Horario chegada, float valor)  {
         this.origem = origem;

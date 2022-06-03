@@ -38,6 +38,7 @@ public class Sistema
 	    A = sc.nextInt();
 	    Data nascData = new Data(D,M,A);
 	    sc.nextLine();
+
 	    System.out.print("Endereço: ");
 	    String endereco = sc.nextLine();
 
@@ -48,7 +49,7 @@ public class Sistema
 
 	public static void removerUsuario() {
 		Scanner sc = new Scanner(System.in);
-		System.out.print("Digite o cpf de quem deseja remover: ");
+		System.out.print("Digite o CPF de quem deseja remover: ");
 		long CPF = sc.nextLong(); 
 
 		boolean encontrado=false;
@@ -57,6 +58,7 @@ public class Sistema
 			
 			if(passageiros.get(i).getDocumento() == CPF) {
 				encontrado = true;
+				cancelarPassagem(passageiros.get(i).getDocumento());
 				passageiros.remove(passageiros.get(i));
 				break;
 			}
@@ -84,25 +86,30 @@ public class Sistema
 				System.out.println("Encontrado!");
 				encontrado = true;
 				Passageiro pessoa = passageiros.get(i); 
+				if(pessoa.getReservado())
+				{
+					System.out.println("Já tens uma passagem reservada !!!");
+					return ;
+				}
+				
 				System.out.println(pessoa.getNome());
 				int numlinha;	
 
 				do{  //laço de verificação "deseja reservar MESMO essa linha?"
-					System.out.println("Deseja reservar qual ônibus?\nDigite o número da linha:");
+					System.out.println("Deseja reservar qual ônibus?\n[linha coluna]\nDigite o número da linha: ");
 					numlinha = sc.nextInt(); //Lê o numero da linha a ser reservada
 					for(j = 0; j < rotas.size(); j++)
 						if(rotas.get(j).getIDRota() == numlinha)
 						{
 							Onibus bus = rotas.get(j).getOnibus();
-							System.out.println("Linha encontrada");
+							System.out.println("\nLinha encontrada\n");
 
-							System.out.print("Deseja reservar para " + numlinha + "-" + rotas.get(j).getDestino() + "\n[S/N]: ");
+							System.out.print("Deseja reservar para " + numlinha + " - " + rotas.get(j).getDestino() + "\n[S/N]: ");
 							sc.nextLine();
 							sn = sc.nextLine();
 
 							if (sn.contains("s") || sn.contains("S"))  
-							{ 
-								System.out.println("Teste!!");
+							{
 								bus.reservarAssento(pessoa);
 								pessoa.setReservado(true);
 								System.out.println("Reservado");
@@ -122,12 +129,8 @@ public class Sistema
 
 	}
 
-	public static void cancelarPassagem()
+	public static void cancelarPassagem(long CPF)
 	{
-		System.out.print("Cancelar passagem\n\nDigite seu CPF: ");
-		Scanner sc = new Scanner(System.in);
-		long CPF = sc.nextLong();
-
 		boolean encontrado = false;
 //		boolean rotaExiste = false; //Pra caso a rota a qual a pessoa estava atrelada tiver sido deletada
 
@@ -173,6 +176,23 @@ public class Sistema
         }
     }
 
+	public static void alterarCadastro()	{
+		System.out.print("Digite o CPF de quem deseja alterar: ");
+		Scanner sc = new Scanner(System.in);
+		boolean encontrado = false;
+		long CPF = sc.nextLong();
+		int opt;
+		for(int i = 0; i < passageiros.size(); i++)	{//Encontrar o passageiro que quer cancelar a passagem
+			if(passageiros.get(i).getDocumento() == CPF) {
+				encontrado = true;
+				Passageiro pessoa = passageiros.get(i);
+				System.out.println("Cadastro encontrado!!\n");
+				//Passageiro pessoa = passageiros.get(i);
+
+			}	
+		}
+	}
+
 	public static void menuUsuario()  {
 		int opt; //pra seleções numericas
 		String sn; //pra seleções de S/N
@@ -184,7 +204,8 @@ public class Sistema
 			System.out.println("3- Mostrar linhas");
 			System.out.println("4- Reservar passagem");
 			System.out.println("5- Cancelar passagem");
-			System.out.println("6- Voltar");
+			System.out.println("6- Alterar cadastro");
+			System.out.println("7- Voltar");
 			System.out.print("\nSeleção: ");
 
 			Scanner sc = new Scanner(System.in);
@@ -215,13 +236,20 @@ public class Sistema
 					}while(!sn.contains("S") && !sn.contains("s") && !sn.contains("n") && !sn.contains("N")); 
 					break;
 				
-				case 5: cancelarPassagem(); break;
+				case 5: 
+						System.out.print("Cancelar passagem\n\nDigite seu CPF: ");
+						Scanner sc2 = new Scanner(System.in);
+						long CPF = sc2.nextLong();
+						cancelarPassagem(CPF); 
+						break;
 
-				default: break;
+				case 6: alterarCadastro(); break;
+
+				default: System.out.println(); break;
 			}
 
 
-		}while(opt != 6);
+		}while(opt != 7);
 	}
 
 

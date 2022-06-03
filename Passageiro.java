@@ -78,12 +78,4 @@ public class Passageiro {
 
   public Passageiro()   {
   }
-
-  //PASSAR ESSA FUNÇÃO PRO SISTEMA.JAVA DEPOIS
-  //ASSIM, PEGA TODOS OS DADOS E DEPOIS ENFIA NO CONSTRUTOR
-  //Função que recebe dados do passageiro e cria um novo
-  public void dadosPassageiro()
-  {
-  
-  }
 }

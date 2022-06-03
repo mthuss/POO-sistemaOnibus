@@ -212,6 +212,8 @@ public class Sistema
 								A = sc.nextInt();
 								Data nascData = new Data(D,M,A);
 								sc.nextLine();
+								pessoa.setData(D, M, A);
+								break;
 
 						case 3:
 
@@ -333,7 +335,7 @@ public class Sistema
 	    	System.out.println("\n\nMenu Admin: ");
     		System.out.println("1- Cadastrar ônibus");
     		System.out.println("2- Cadastrar motorista");
-    		System.out.println("3- Demitir motorista");
+    		System.out.println("3- Executar motorista");
     		System.out.println("4- Destruir ônibus (self destruct)");
     		System.out.println("5- Editar rotas");
     		System.out.println("6- Sair");

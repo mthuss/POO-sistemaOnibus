@@ -25,9 +25,9 @@ public class Passageiro {
   }
 
   public void setData(int dia, int mes, int ano)  {
-    nascData.setDia(dia);
-    nascData.setMes(mes);
-    nascData.setAno(ano);
+    this.nascData.setDia(dia);
+    this.nascData.setMes(mes);
+    this.nascData.setAno(ano);
 }
   public Data getData()  {
     return (this.nascData);

@@ -63,28 +63,6 @@ public class Passageiro {
   //Função que recebe dados do passageiro e cria um novo
   public void dadosPassageiro()
   {
-    System.out.println("Realize seu cadastro: ");
-    System.out.print("Nome: ");
-    Scanner sc = new Scanner(System.in);
-    this.nome = sc.nextLine();
-
-    boolean repetido = false;
-    System.out.print("CPF: ");
-    this.documento = sc.nextLong();
-    for(int i = 0; i < passageiros.)
-
-
-    System.out.print("Digite sua data de nascimento: \nDia: ");
-    int D,M,A;
-    D = sc.nextInt();
-    System.out.print("Mês: ");
-    M = sc.nextInt();
-    System.out.print("Ano: ");
-    A = sc.nextInt();
-    this.nascData = new Data(D,M,A);
-    sc.nextLine();
-    System.out.print("Endereço: ");
-    this.endereco = sc.nextLine();
-    
+  
   }
 }

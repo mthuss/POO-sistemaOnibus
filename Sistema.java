@@ -8,8 +8,41 @@ public class Sistema
 
 	public static void cadastrarUsuario()
 	{
-		Passageiro usuario = new Passageiro();
-		usuario.dadosPassageiro();
+		System.out.println("\nRealize seu cadastro: ");
+
+	    boolean repetido = false;
+
+	    System.out.print("CPF: ");
+ 	    Scanner sc = new Scanner(System.in);
+	    long documento = sc.nextLong();
+
+		sc.nextLine(); //Limpa buffer
+
+		//Verifica se já existe algum usuário com este CPF cadastrado
+		for(int i = 0; i < passageiros.size(); i++)
+			if(passageiros.get(i).getDocumento() == documento)
+			{
+				System.out.println("Este CPF já está cadastrado!");
+				return;
+			}
+
+	    System.out.print("Nome: ");
+	    String nome = sc.nextLine();
+
+	    System.out.print("\nData de nascimento: \nDia: ");
+	    int D,M,A;
+	    D = sc.nextInt();
+	    System.out.print("Mês: ");
+	    M = sc.nextInt();
+	    System.out.print("Ano: ");
+	    A = sc.nextInt();
+	    Data nascData = new Data(D,M,A);
+	    sc.nextLine();
+	    System.out.print("Endereço: ");
+	    String endereco = sc.nextLine();
+
+//		usuario.dadosPassageiro();
+		Passageiro usuario = new Passageiro(documento,nome,nascData,endereco);
 		passageiros.add(usuario);
 	}
 
@@ -109,7 +142,7 @@ public class Sistema
 			System.out.println("3- Mostrar linhas");
 			System.out.println("4- Reservar passagem");
 			System.out.println("5- Mostrar rotas disponíveis");
-			System.out.println("6- Sair");
+			System.out.println("6- Voltar");
 			System.out.print("\nSeleção: ");
 
 			Scanner sc = new Scanner(System.in);
@@ -120,9 +153,7 @@ public class Sistema
 				
 				case 2: removerUsuario(); break;
 							
-				case 3:
-					
-					break;
+				case 3:	imprimirRotas(); break;
 
 				case 4: 
 					do{

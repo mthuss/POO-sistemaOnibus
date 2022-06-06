@@ -67,7 +67,7 @@ public class Onibus {
 
     //Recebe dados do usuário e valida eles
     do{
-      System.out.print("\nEscolha seu assento: ");
+      System.out.print("\nEscolha seu assento [linha coluna]: ");
       Scanner sc = new Scanner(System.in);
       i = sc.nextInt();
       j = sc.nextInt();

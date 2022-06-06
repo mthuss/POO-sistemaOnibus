@@ -96,7 +96,7 @@ public class Sistema
 				int numlinha;	
 
 				do{  //laço de verificação "deseja reservar MESMO essa linha?"
-					System.out.println("Deseja reservar qual ônibus?\n[linha coluna]\nDigite o número da linha: ");
+					System.out.println("Deseja reservar qual ônibus?\nDigite o número da linha: ");
 					numlinha = sc.nextInt(); //Lê o numero da linha a ser reservada
 					for(j = 0; j < rotas.size(); j++)
 						if(rotas.get(j).getIDRota() == numlinha)
@@ -182,7 +182,8 @@ public class Sistema
 		boolean encontrado = false;
 		long CPF = sc.nextLong();
 		int opt;
-		for(int i = 0; i < passageiros.size(); i++)	{//Encontrar o passageiro que quer cancelar a passagem
+
+		for(int i = 0; i < passageiros.size(); i++)	{
 			if(passageiros.get(i).getDocumento() == CPF) {
 				Passageiro pessoa = passageiros.get(i);
 				encontrado = true;
@@ -252,6 +253,7 @@ public class Sistema
 
 			Scanner sc = new Scanner(System.in);
 			opt = sc.nextInt();
+			long CPF;
 			switch(opt)
 			{
 				case 1: cadastrarUsuario(); break;
@@ -280,8 +282,7 @@ public class Sistema
 				
 				case 5: 
 						System.out.print("Cancelar passagem\n\nDigite seu CPF: ");
-						Scanner sc2 = new Scanner(System.in);
-						long CPF = sc2.nextLong();
+						CPF = sc.nextLong();
 						cancelarPassagem(CPF); 
 						break;
 
@@ -290,9 +291,9 @@ public class Sistema
 				case 7:
 						System.out.print("Digite seu CPF: ");
 						boolean encontrado = false;
-						long CPF2 = sc.nextLong();
-						for(int i = 0; i < passageiros.size(); i++)	{//Encontrar o passageiro que quer cancelar a passagem
-							if(passageiros.get(i).getDocumento() == CPF2) {
+						CPF = sc.nextLong();
+						for(int i = 0; i < passageiros.size(); i++)	{
+							if(passageiros.get(i).getDocumento() == CPF) {
 								passageiros.get(i).imprimirDados();
 								encontrado = true;
 							}
@@ -301,12 +302,12 @@ public class Sistema
 							System.out.println("Usuario não encontrado !!!");
 						break;
 
-				default: System.out.println(); break;
+				default: System.out.println(""); break;
 			}
 
 
 		}while(opt != 8);
-		passageiros.get(0).imprimirDados();
+//		passageiros.get(0).imprimirDados();
 	}
 
 //----------------------------------------------------------------------------

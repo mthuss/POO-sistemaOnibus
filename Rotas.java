@@ -37,17 +37,17 @@ public class Rotas {
         this.destino = destino;
     }
 
-    public Horario getSaida() {
+    public Horario getHoraSaida() {
         return saida;
     }
-    public void setSaida(Horario saida) {
+    public void setHoraSaida(Horario saida) {
         this.saida = saida;
     }
 
-    public Horario getChegada() {
+    public Horario getHoraChegada() {
         return chegada;
     }
-    public void setChegada(Horario chegada) {
+    public void setHoraChegada(Horario chegada) {
         this.chegada = chegada;
     }
     

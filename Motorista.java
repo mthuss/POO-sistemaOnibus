@@ -5,6 +5,7 @@ public class Motorista {
     private Data dataAdmissao;
     private String nome;
     private Onibus buser; //isso tem que ser atribuido!!!!!! obrigatoriamente!!!!!
+    private boolean estaAtribuido = false;
 
     //setters e getters
     public long getCNH() {
@@ -26,6 +27,15 @@ public class Motorista {
     }
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public boolean estaAtribuido()
+    {
+        return this.estaAtribuido;
+    }
+    public void setAtribuicao(boolean tf)
+    {
+        this.estaAtribuido = tf;
     }
     
     public Motorista(long CNH, Data dataAdmissao, String nome)    {

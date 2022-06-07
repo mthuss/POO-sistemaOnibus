@@ -179,7 +179,8 @@ public class Sistema
 			{
 				rota = rotas.get(i);
                 System.out.println(rota.getIDRota() + ": " + rota.getOrigem() + " - " + rota.getDestino());
-//				System.out.println("Saída: " + getHoraSaida() + "\nChegada: " + rotas.get(i).getHoraChegada());
+				//Usar um printf com %02d pros horarios
+				System.out.println("Saída: " + rota.getHoraSaida().getHoras() + ":" + rota.getHoraSaida().getMinutos() + "\nChegada: " + rota.getHoraChegada().getHoras() + ":" + rota.getHoraChegada().getMinutos());
 				System.out.println("Preço: " + rota.getValor());
 			}
 			
@@ -327,7 +328,7 @@ public class Sistema
         Onibus bus = new Onibus();
         bus.dadosOnibus();
 		onibuses.add(bus);
-        System.out.print("Deseja associá-lo a alguma rota? (S/N): ");
+        System.out.print("Deseja associá-lo a alguma rota? (S/N): "); //Dar uma revisada nisso depois, pra ver se ta linkando os dois do jeito certo
         Scanner sc = new Scanner(System.in);
         String sn = sc.nextLine();
 
@@ -401,15 +402,38 @@ public class Sistema
 
 	}
 
-	public static void atrelarMotorista()
+	public static void atribuirMotorista()
 	{
-		System.out.print("A qual onibus deseja atrelar o motorista?\nPlaca do onibus: ");
+		System.out.print("A qual onibus deseja atribuir o motorista?\nPlaca do onibus: ");
 		Scanner sc = new Scanner(System.in);
 		String placa = sc.nextLine();
 		
-		for(int i = 0; i < onibuses.size(); i++)
-			if(onibuses.get(i).getPlaca() == placa)
-				System.out.println("Encontrado!!");
+		for(int i = 0; i < onibuses.size(); i++) //Encontra a rota em questão
+			if(onibuses.get(i).getPlaca().equals(placa))
+			{	System.out.println("Encontrado!!");
+
+				if(onibuses.get(i).temMotorista())
+					System.out.println("Este ônibus já tem um motorista atribuido");
+		
+				else
+				{
+					System.out.print("Digite o CNH do motorista: ");
+					long CNH = sc.nextLong();
+					for(int j = 0; j < motoristas.size(); j++) //Encontra o motorista a ser atrelado
+					{
+						if(motoristas.get(j).getCNH() == CNH)
+						{
+							if(motoristas.get(j).estaAtribuido())
+								System.out.println("Este motorista já está atribuido a um onibus");
+							else
+							{
+								onibuses.get(i).setDriver(motoristas.get(j));
+							}
+						}
+					}
+				}
+				break;
+			}
 	}
 
 
@@ -429,30 +453,54 @@ public class Sistema
 		sc.nextLine();
 		String auxOrigem = 	sc.nextLine();
 
-		System.out.print("Digite a primeira parada: ");
+		System.out.print("Digite a parada: ");
 		String auxParada = sc.nextLine();
 
 		System.out.print("Digite a cidade destino: ");
 		String auxDestino = sc.nextLine();
 
-		System.out.print("Digite o horario de saida: ");
-//		Horario auxSaida;
-//		auxSaida.horas = sc.nextInt();
-		
+		int PHour, PMinutes;
+		do {
+			System.out.println("Horario de partida");
+			System.out.print("Digite o horario de saida: ");
+			PHour = sc.nextInt();
+			if (PHour < 0 || PHour > 24)
+				System.out.println("Horário de saida inválido");
+		} while (PHour < 0 || PHour > 24);
 
-//		Rotas rota = new Rotas(auxOrigem, auxParada, auxDestino);
-/*
-	private String origem;
-    private int numRota;
-    private String parada;
-    private String destino;
-    private Horario saida; //MENOR QUE A CHEGADA
-    private Horario chegada; //MAIOR QUE A SAIDA
-    private float valor;
-    private boolean onibusAtribuido = false;
+		do {
+			System.out.print("Digite os minutos de saida: ");
+			PMinutes = sc.nextInt();
+			if (PMinutes < 0 || PMinutes > 60)
+				System.out.println("Horário de saida inválido");
+		} while (PMinutes < 0 || PMinutes > 60);
 
-    public Rotas(String origem, String parada, String destino, Horario saida, Horario chegada, float valor, int numRota)  {
-*/
+		Horario Hpartida = new Horario(PHour, PMinutes);
+
+		int CHour, CMinutes;
+		do {
+			System.out.println("Horarios de chegada");
+			System.out.println("[Caso o horário de chegada seja menor ou igual ao de saída, entende-se que será do dia seguinte]");
+			System.out.print("Digite o horario de chegada: ");
+			CHour = sc.nextInt();
+			if (CHour < 0 || CHour > 24)
+				System.out.println("Horário de chegada inválido");
+		} while (CHour < 0 || CHour > 24);
+
+		do {
+			System.out.print("Digite os minutos de chegada: ");
+			CMinutes = sc.nextInt();
+			if (CMinutes < 0 || CMinutes > 60)
+					System.out.println("Horário de chegada inválido");
+		} while (CMinutes < 0 || CMinutes > 60);
+
+		Horario Hchegada = new Horario (CHour, CMinutes);
+
+		System.out.print("Digite o preço dessa passagem: ");
+		float auxPreco = sc.nextFloat();
+
+		Rotas rota = new Rotas(auxOrigem, auxParada, auxDestino, Hpartida, Hchegada, auxPreco, auxID);
+		rotas.add(rota);
 	}
 //----------------------------------------------------------------------------
 	public static void menuADM()  {
@@ -461,10 +509,10 @@ public class Sistema
 	    	System.out.println("\n\nMenu Admin: ");
     		System.out.println("1- Cadastrar ônibus"); //Feita
     		System.out.println("2- Cadastrar motorista"); //Feita
-			System.out.println("3- Atrelar motorista ao onibus");
+			System.out.println("3- Atribuir motorista ao onibus"); //Feita; precisa testar
     		System.out.println("4- Excluir motorista");
     		System.out.println("5- Destruir ônibus (self destruct)");
-    		System.out.println("6- Criar rotas");
+    		System.out.println("6- Criar rotas"); //Feita
     		System.out.println("7- Sair");
 
             System.out.print("Seleção: ");
@@ -482,9 +530,13 @@ public class Sistema
 					break;
 
 				case 3:
-					atrelarMotorista();
+					atribuirMotorista();
 					break;
 				
+				case 6:
+					criarRota();
+					break;
+
 				default:
 					break;
             }

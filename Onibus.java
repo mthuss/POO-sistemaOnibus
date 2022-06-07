@@ -12,6 +12,7 @@ public class Onibus {
     private Motorista driver;
     private int IDRota;
     private String placa;
+    boolean temMotorista = false;
 
     //setters e getters
     public String getModelo() {
@@ -56,7 +57,23 @@ public class Onibus {
     {
       return this.placa;
     }
+    public void setDriver(Motorista driver)
+    {
+      this.driver = driver;
+    }
+    public Motorista getDriver()
+    {
+      return this.driver;
+    }
 
+    public boolean temMotorista()
+    {
+      return this.temMotorista;
+    }
+    public void setTemMotorista(boolean tf)
+    {
+      this.temMotorista = tf;
+    }
 //Métodos
 //------------------------------------------------------
   public void imprimeAssentos()  {

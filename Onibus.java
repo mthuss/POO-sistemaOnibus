@@ -11,6 +11,7 @@ public class Onibus {
  //   private ArrayList<Passageiro> passageiros = new ArrayList<>();
     private Motorista driver;
     private int IDRota;
+    private String placa;
 
     //setters e getters
     public String getModelo() {
@@ -47,7 +48,14 @@ public class Onibus {
     	return this.IDRota;
     }
 
-
+    public void setPlaca(String placa)
+    {
+      this.placa = placa;
+    }
+    public String getPlaca()
+    {
+      return this.placa;
+    }
 
 //Métodos
 //------------------------------------------------------
@@ -101,6 +109,9 @@ public class Onibus {
       sc.nextLine();
       System.out.print("Quilometragem: ");
       this.quilometragem = sc.nextInt();
+      sc.nextLine();
+      System.out.print("Placa: ");
+      this.placa = sc.nextLine();
     }
 
     //construtores

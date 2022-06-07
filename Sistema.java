@@ -6,6 +6,7 @@ public class Sistema
 	public static ArrayList<Passageiro> passageiros = new ArrayList<>();
 	public static ArrayList<Rotas> rotas = new ArrayList<>();
 	public static ArrayList<Motorista> motoristas = new ArrayList<>();
+	public static ArrayList<Onibus> onibuses = new ArrayList<>();
 
 
 	public static void cadastrarUsuario()
@@ -325,6 +326,7 @@ public class Sistema
     {
         Onibus bus = new Onibus();
         bus.dadosOnibus();
+		onibuses.add(bus);
         System.out.print("Deseja associá-lo a alguma rota? (S/N): ");
         Scanner sc = new Scanner(System.in);
         String sn = sc.nextLine();
@@ -399,17 +401,70 @@ public class Sistema
 
 	}
 
+	public static void atrelarMotorista()
+	{
+		System.out.print("A qual onibus deseja atrelar o motorista?\nPlaca do onibus: ");
+		Scanner sc = new Scanner(System.in);
+		String placa = sc.nextLine();
+		
+		for(int i = 0; i < onibuses.size(); i++)
+			if(onibuses.get(i).getPlaca() == placa)
+				System.out.println("Encontrado!!");
+	}
+
+
+	public static void criarRota()	{
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Digite o ID da rota: ");
+		int auxID = sc.nextInt();
+		
+		for(int i = 0; i < passageiros.size(); i++)	{
+			if(rotas.get(i).getIDRota() == auxID) {
+				System.out.println("Esse ID já foi cadastrado!");
+				return;
+			}
+		}
+
+		System.out.print("Digite a cidade origem: ");
+		sc.nextLine();
+		String auxOrigem = 	sc.nextLine();
+
+		System.out.print("Digite a primeira parada: ");
+		String auxParada = sc.nextLine();
+
+		System.out.print("Digite a cidade destino: ");
+		String auxDestino = sc.nextLine();
+
+		System.out.print("Digite o horario de saida: ");
+//		Horario auxSaida;
+//		auxSaida.horas = sc.nextInt();
+		
+
+//		Rotas rota = new Rotas(auxOrigem, auxParada, auxDestino);
+/*
+	private String origem;
+    private int numRota;
+    private String parada;
+    private String destino;
+    private Horario saida; //MENOR QUE A CHEGADA
+    private Horario chegada; //MAIOR QUE A SAIDA
+    private float valor;
+    private boolean onibusAtribuido = false;
+
+    public Rotas(String origem, String parada, String destino, Horario saida, Horario chegada, float valor, int numRota)  {
+*/
+	}
 //----------------------------------------------------------------------------
 	public static void menuADM()  {
         int opt;
         do{
 	    	System.out.println("\n\nMenu Admin: ");
     		System.out.println("1- Cadastrar ônibus"); //Feita
-    		System.out.println("2- Cadastrar motorista");
+    		System.out.println("2- Cadastrar motorista"); //Feita
 			System.out.println("3- Atrelar motorista ao onibus");
     		System.out.println("4- Excluir motorista");
     		System.out.println("5- Destruir ônibus (self destruct)");
-    		System.out.println("6- Editar rotas");
+    		System.out.println("6- Criar rotas");
     		System.out.println("7- Sair");
 
             System.out.print("Seleção: ");
@@ -427,17 +482,19 @@ public class Sistema
 					break;
 
 				case 3:
+					atrelarMotorista();
 					break;
 				
 				default:
-					break
+					break;
             }
         }while(opt != 7);
 	}
 
 
-
+/*
     ArrayList<Rotas> getRotas(){
         return this.rotas;
     }
+*/
 }

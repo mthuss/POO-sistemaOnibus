@@ -509,7 +509,7 @@ public class Sistema
 	    	System.out.println("\n\nMenu Admin: ");
     		System.out.println("1- Cadastrar ônibus"); //Feita
     		System.out.println("2- Cadastrar motorista"); //Feita
-			System.out.println("3- Atribuir motorista ao onibus"); //Feita; precisa testar
+		System.out.println("3- Atribuir motorista ao onibus"); //Feita; precisa testar
     		System.out.println("4- Excluir motorista");
     		System.out.println("5- Destruir ônibus (self destruct)");
     		System.out.println("6- Criar rotas"); //Feita

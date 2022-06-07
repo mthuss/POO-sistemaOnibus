@@ -5,6 +5,8 @@ public class Sistema
 {
 	public static ArrayList<Passageiro> passageiros = new ArrayList<>();
 	public static ArrayList<Rotas> rotas = new ArrayList<>();
+	public static ArrayList<Motorista> motoristas = new ArrayList<>();
+
 
 	public static void cadastrarUsuario()
 	{
@@ -167,12 +169,19 @@ public class Sistema
 
     public static void imprimirRotas()
     {
+		Rotas rota;
         if(rotas.size() == 0)
             System.out.println("Não há rotas disponíveis!");
         else
         {
             for(int i = 0; i < rotas.size(); i++)
-                System.out.println(rotas.get(i).getIDRota() + " - " + rotas.get(i).getDestino());
+			{
+				rota = rotas.get(i);
+                System.out.println(rota.getIDRota() + ": " + rota.getOrigem() + " - " + rota.getDestino());
+//				System.out.println("Saída: " + getHoraSaida() + "\nChegada: " + rotas.get(i).getHoraChegada());
+				System.out.println("Preço: " + rota.getValor());
+			}
+			
         }
     }
 
@@ -241,13 +250,13 @@ public class Sistema
 
 		do{
 			System.out.println("\n\nMenu Usuário: ");
-			System.out.println("1- Cadastrar usuário");
-			System.out.println("2- Remover usuário");
-			System.out.println("3- Mostrar linhas");
-			System.out.println("4- Reservar passagem");
-			System.out.println("5- Cancelar passagem");
-			System.out.println("6- Alterar cadastro");
-			System.out.println("7- Mostrar Cadastro");
+			System.out.println("1- Cadastrar usuário"); //Feita
+			System.out.println("2- Remover usuário"); //Feita
+			System.out.println("3- Mostrar linhas"); //Feita*; falta botar horarios (problema!!!)
+			System.out.println("4- Reservar passagem"); //Feita
+			System.out.println("5- Cancelar passagem"); //Feita
+			System.out.println("6- Alterar cadastro"); //Feita
+			System.out.println("7- Mostrar Cadastro"); //Feita
 			System.out.println("8- Voltar");
 			System.out.print("\nSeleção: ");
 
@@ -351,18 +360,57 @@ public class Sistema
         
     }
 
+	public static void cadastrarMotorista()
+	{
+		System.out.println("\nRealize o cadastro do motorista: ");
+
+	    boolean repetido = false;
+
+	    System.out.print("CNH: ");
+ 	    Scanner sc = new Scanner(System.in);
+	    long CNH = sc.nextLong();
+
+		sc.nextLine(); //Limpa buffer
+
+		//Verifica se já existe algum motorista com este CNH cadastrado
+		for(int i = 0; i < motoristas.size(); i++)
+			if(motoristas.get(i).getCNH() == CNH)
+			{
+				System.out.println("Esta CNH já está cadastrada!");
+				return;
+			}
+
+	    System.out.print("Nome: ");
+	    String nome = sc.nextLine();
+
+	    System.out.print("\nData de admissão: \nDia: ");
+	    int D,M,A;
+	    D = sc.nextInt();
+	    System.out.print("Mês: ");
+	    M = sc.nextInt();
+	    System.out.print("Ano: ");
+	    A = sc.nextInt();
+	    Data admissao = new Data(D,M,A);
+	    sc.nextLine();
+
+//		usuario.dadosPassageiro();
+		Motorista motorista = new Motorista(CNH,admissao,nome);
+		motoristas.add(motorista);
+
+	}
 
 //----------------------------------------------------------------------------
 	public static void menuADM()  {
         int opt;
         do{
 	    	System.out.println("\n\nMenu Admin: ");
-    		System.out.println("1- Cadastrar ônibus");
+    		System.out.println("1- Cadastrar ônibus"); //Feita
     		System.out.println("2- Cadastrar motorista");
-    		System.out.println("3- Executar motorista");
-    		System.out.println("4- Destruir ônibus (self destruct)");
-    		System.out.println("5- Editar rotas");
-    		System.out.println("6- Sair");
+			System.out.println("3- Atrelar motorista ao onibus");
+    		System.out.println("4- Excluir motorista");
+    		System.out.println("5- Destruir ônibus (self destruct)");
+    		System.out.println("6- Editar rotas");
+    		System.out.println("7- Sair");
 
             System.out.print("Seleção: ");
             Scanner sc = new Scanner(System.in);
@@ -372,8 +420,19 @@ public class Sistema
             {
                 case 1:
                     cadastrarOnibus();
+					break;
+
+				case 2:
+					cadastrarMotorista();
+					break;
+
+				case 3:
+					break;
+				
+				default:
+					break
             }
-        }while(opt != 6);
+        }while(opt != 7);
 	}
 
 

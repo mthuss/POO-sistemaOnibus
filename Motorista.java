@@ -1,15 +1,16 @@
 //Tava duplicada, mals, eu tirei a cópia
 
 public class Motorista {
-    private String CNH;
+    private long CNH;
     private Data dataAdmissao;
     private String nome;
+    private Onibus buser; //isso tem que ser atribuido!!!!!! obrigatoriamente!!!!!
 
     //setters e getters
-    public String getCNH() {
+    public long getCNH() {
         return CNH;
     }
-    public void setCNH(String CNH) {
+    public void setCNH(long CNH) {
         this.CNH = CNH;
     }
 
@@ -27,7 +28,7 @@ public class Motorista {
         this.nome = nome;
     }
     
-    public Motorista(String CNH, Data dataAdmissao, String nome)    {
+    public Motorista(long CNH, Data dataAdmissao, String nome)    {
         this.CNH = CNH;
         this.dataAdmissao = dataAdmissao;
         this.nome = nome;

@@ -85,6 +85,13 @@ public class Passageiro {
     System.out.println("CPF: " + this.documento);
     System.out.println("Endereço: " + this.endereco);
     System.out.println("Data de nascimento: " + this.nascData.getDia() + "/" + this.nascData.getMes() + "/" + this.nascData.getAno());
-    
+    System.out.print("Rota reservada: "); 
+    if(reservado)
+    {
+      System.out.println(this.numLinha);
+      System.out.println("Local do assento: " + assento[0]+1 + " " + assento[1]+1);
+    }
+    else System.out.println("N/A");
+
   }
 }

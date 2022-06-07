@@ -7,7 +7,7 @@ public class Onibus {
     private String marca;
     private int quilometragem;
     private int assentos[][] = new int[10][3];
-    private ArrayList<Rotas> rotasCirculadas = new ArrayList<>(); //rotas que o onibus percorre
+//    private ArrayList<Rotas> rotasCirculadas = new ArrayList<>(); //rotas que o onibus percorre
  //   private ArrayList<Passageiro> passageiros = new ArrayList<>();
     private Motorista driver;
     private int IDRota;

@@ -1,3 +1,6 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+
 public class Rotas {
     private String origem;
     private String parada;
@@ -5,6 +8,9 @@ public class Rotas {
     private Horario saida; //MENOR QUE A CHEGADA
     private Horario chegada; //MAIOR QUE A SAIDA
     private float valor;
+    
+    private ArrayList<Onibus> busos = new ArrayList<>();
+
     private Onibus onibus = new Onibus(); //Nota: PRECISA SER ASSIM!!
 //    private Onibus onibus; //E NÃO ASSIM!!
     private int numRota;

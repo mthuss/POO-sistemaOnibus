@@ -452,6 +452,7 @@ public class Sistema
 				driver.setAtribuicao(false);
 				driver.getOnibus().setTemMotorista(false);
 			 //Remove ele do array list dps	
+			 	motoristas.remove(driver);
 			}
 		}
 	}
@@ -555,7 +556,7 @@ public class Sistema
 				System.out.printf("Preço: %.2f R$", rota.getValor());
 				if(rota.getAtribBus())
 				{
-					System.out.println("");
+					rota.getOnibus().imprimirDados();
 					
 					if(motoristas.size() != 0 && rota.getOnibus().temMotorista()) { //teoricamente não precisa do motoristas.size(). Só pra garantir kk
 						System.out.println("Motorista: " + rota.getOnibus().getDriver().getNome() + " [CNH: " + rota.getOnibus().getDriver().getCNH() + "]");
@@ -563,6 +564,7 @@ public class Sistema
 						System.out.printf("Data admissão %02d/%02d/%02d\n", data.getDia(), data.getMes(), data.getAno());
 					}
 				}
+				else System.out.println("Ônibus: N/A");
 			}
 			
         }

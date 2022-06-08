@@ -11,7 +11,7 @@ public class Rotas {
     private int numRota;
     private boolean onibusAtribuido = false;
     
-    private ArrayList<Onibus> busos = new ArrayList<>();
+//    private ArrayList<Onibus> busos = new ArrayList<>(); //VAI SER UM SÓ
 
     private Onibus onibus = new Onibus(); //Nota: PRECISA SER ASSIM!!
 //    private Onibus onibus; //E NÃO ASSIM!!
@@ -79,6 +79,12 @@ public class Rotas {
     {
         return this.onibusAtribuido;
     }
+
+//    public ArrayList<Onibus> getArrOnibus()
+//    {
+//        return this.busos;
+//    }
+
   //construtores
     public Rotas(String origem, String parada, String destino, Horario saida, Horario chegada, float valor, int numRota)  {
         this.origem = origem;

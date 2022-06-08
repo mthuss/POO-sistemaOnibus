@@ -131,6 +131,15 @@ public class Onibus {
       this.placa = sc.nextLine();
     }
 
+    public void imprimirDados()
+    {
+      System.out.println("Modelo: " + this.modelo);
+      System.out.println("Marca: " + this.marca);
+      System.out.println("Ano de Fabricação: " + this.anoFabri);
+      System.out.println("Quilometragem: " + this.quilometragem);
+      System.out.println("Placa: " + this.placa);
+    
+    }
     //construtores
     public Onibus(String modelo, int anoFabri, String marca,
 int quilometragem)    {

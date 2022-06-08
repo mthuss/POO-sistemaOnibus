@@ -38,6 +38,16 @@ public class Motorista {
         this.estaAtribuido = tf;
     }
     
+    public Onibus getOnibus()   
+    {
+        return this.buser;
+    }
+
+    public void setOnibus(Onibus bus)
+    {
+        this.buser = bus;
+    }
+
     public Motorista(long CNH, Data dataAdmissao, String nome)    {
         this.CNH = CNH;
         this.dataAdmissao = dataAdmissao;

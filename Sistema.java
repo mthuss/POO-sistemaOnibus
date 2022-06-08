@@ -190,8 +190,7 @@ public class Sistema
 					temRota = true;
 					rota = rotas.get(i);
 	                System.out.println(rota.getIDRota() + ": " + rota.getOrigem() + " - " + rota.getDestino());
-					//Usar um printf com %02d pros horarios
-					System.out.println("Saída: " + rota.getHoraSaida().getHoras() + ":" + rota.getHoraSaida().getMinutos() + "\nChegada: " + rota.getHoraChegada().getHoras() + ":" + rota.getHoraChegada().getMinutos());
+					System.out.println("Saída: " + rota.getHoraSaida().imprimirHorario() + "\nChegada: " + rota.getHoraChegada().imprimirHorario());
 					System.out.println("Preço: " + rota.getValor());
 				}
 			}
@@ -582,7 +581,6 @@ public class Sistema
 				rota = rotas.get(i);
                 System.out.println("Rota " + rota.getIDRota() + ": " + rota.getOrigem() + " - " + rota.getDestino());
 				System.out.println("Parada: " + rota.getParada());
-//				System.out.printf("Saída: %02d:%02d\nChegada: %02d:%02d\n",rota.getHoraSaida().getHoras(), rota.getHoraSaida().getMinutos(), rota.getHoraChegada().getHoras(), rota.getHoraChegada().getMinutos());
 				System.out.println("Saída: " + rota.getHoraSaida().imprimirHorario() + "\nChegada: " + rota.getHoraChegada().imprimirHorario());
 				System.out.printf("Preço: R$%.2f\n", rota.getValor());
 				if(rota.getAtribBus())

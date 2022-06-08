@@ -11,8 +11,10 @@ public class Onibus {
  //   private ArrayList<Passageiro> passageiros = new ArrayList<>();
     private Motorista driver;
     private int IDRota;
+//    private Rotas rota = new Rotas();
     private String placa;
     boolean temMotorista = false;
+    boolean atribuido = false;
 
     //setters e getters
     public String getModelo() {
@@ -74,6 +76,25 @@ public class Onibus {
     {
       this.temMotorista = tf;
     }
+
+    public void setAtribuido(boolean tf)
+    {
+      this.atribuido = tf;
+    }
+
+    public boolean atribuidoRota()
+    {
+      return this.atribuido;
+    }
+
+//    public void setRota(Rotas rota)
+//    {
+//      this.rota = rota;
+//    }
+//    public Rotas getRota(Rotas rota)
+//    {
+//      return this.rota;
+//    }
 //Métodos
 //------------------------------------------------------
   public void imprimeAssentos()  {
@@ -133,11 +154,12 @@ public class Onibus {
 
     public void imprimirDados()
     {
-      System.out.println("Modelo: " + this.modelo);
-      System.out.println("Marca: " + this.marca);
-      System.out.println("Ano de Fabricação: " + this.anoFabri);
-      System.out.println("Quilometragem: " + this.quilometragem);
-      System.out.println("Placa: " + this.placa);
+      System.out.println("Ônibus: ");
+      System.out.println("  Modelo: " + this.modelo);
+      System.out.println("  Marca: " + this.marca);
+      System.out.println("  Ano de Fabricação: " + this.anoFabri);
+      System.out.println("  Quilometragem: " + this.quilometragem);
+      System.out.println("  Placa: " + this.placa);
     
     }
     //construtores

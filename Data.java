@@ -47,4 +47,11 @@ public class Data {
     }
     public Data()   {
     }
+
+    //Métodos
+    //--------------------
+    public String imprimirData()
+    {
+        return String.format("%02d/%02d/%02d",this.dia,this.mes,this.ano);
+    }
 }

@@ -13,8 +13,8 @@ public class Rotas {
     
 //    private ArrayList<Onibus> busos = new ArrayList<>(); //VAI SER UM SÓ
 
-    private Onibus onibus = new Onibus(); //Nota: PRECISA SER ASSIM!!
-//    private Onibus onibus; //E NÃO ASSIM!!
+//    private Onibus onibus = new Onibus(); //Nota: PRECISA SER ASSIM!!
+    private Onibus onibus; //E NÃO ASSIM!!
     
     public String getOrigem() {
         return origem;

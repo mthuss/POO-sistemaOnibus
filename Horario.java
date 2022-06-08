@@ -24,4 +24,9 @@ public class Horario {
     }
     public Horario()    {
     }
+
+    public String imprimirHorario()
+    {
+        return String.format("%02d:%02d",this.horas,this.minutos);
+    }
 }

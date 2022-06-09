@@ -561,18 +561,18 @@ public class Sistema
 
 	public static void criarRota()	{
 		Scanner sc = new Scanner(System.in);
-		System.out.print("Digite o ID da rota: ");
-		int auxID = sc.nextInt();
-		
-		for(int i = 0; i < rotas.size(); i++)	{
-			if(rotas.get(i).getIDRota() == auxID) {
-				System.out.println("Esse ID já foi cadastrado!");
-				return;
-			}
-		}
+//		System.out.print("Digite o ID da rota: ");
+//		int auxID = sc.nextInt();
+		int auxID = rotas.size();
+//		for(int i = 0; i < rotas.size(); i++)	{
+//			if(rotas.get(i).getIDRota() == auxID) {
+//				System.out.println("Esse ID já foi cadastrado!");
+//				return;
+//			}
+//		}
 
 		System.out.print("Digite a cidade origem: ");
-		sc.nextLine();
+//		sc.nextLine();
 		String auxOrigem = 	sc.nextLine();
 
 		System.out.print("Digite a parada: ");
@@ -654,21 +654,67 @@ public class Sistema
 			
         }
     }
+
+	public static void apagarRota() 
+	{
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Deseja apagar qual rota?\n\nRota: ");
+		int ID = sc.nextInt();
+		if(ID < 0 || ID > rotas.size())
+		{
+			System.out.println("ID inválido");
+			return;
+		}
+
+
+
+
+
+
+
+
+	}
+
+	public static void desatribuirOnibus()	{
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Digite a placa do onibus que quer desatribuir: ");
+		String auxPlaca = sc.nextLine();
+		boolean encontradoOnibus = false;
+
+		for (int j=0; j<onibuses.size(); j++){
+			if (auxPlaca == onibuses.get(j).getPlaca())	{
+				encontradoOnibus = true;
+				System.out.print("Digite o ID da rota que deseja desatribuir: ");
+				sc.nextInt();
+				int auxID = sc.nextInt();
+				if (auxID > 0 && auxID < rotas.size())	{
+					Rotas rota = rotas.get(auxID);
+					rota.getOnibus().setIDRota(-1);
+					rota.getOnibus().setAtribuido(false);
+					rota.setOnibus(null);
+					rota.setAtribBus(false);
+				}
+				else System.out.println("ID inválido!!!");
+			}
+		}
+	}
+
+
 //----------------------------------------------------------------------------
 	public static void menuADM()  {
         int opt;
-        do{
+        do{	//falta remover rotas E SÓ
 	    	System.out.println("\n\nMenu Admin: ");
     		System.out.println("1- Criar rotas"); //Feita
     		System.out.println("2- Imprimir Rotas"); //Feita
     		System.out.println("3- Cadastrar ônibus"); //Feita
-			System.out.println("4- Atribuir ônibus a rota"); 
+			System.out.println("4- Atribuir ônibus a rota"); //Feita
     		System.out.println("5- Cadastrar motorista"); //Feita
 			System.out.println("6- Atribuir motorista ao onibus"); //Feita
 			System.out.println("7- Remover motorista de onibus"); //Feita
     		System.out.println("8- Excluir motorista"); //Feita, nao testada
-    		System.out.println("9- Destruir ônibus (self destruct)"); //Precisa de uma pra remover onibus da rota tbm
-			System.out.println("10- Remover onibus da rota");
+    		System.out.println("9- Destruir ônibus (self destruct)");
+			System.out.println("10- Remover onibus da rota"); //Feito
 			System.out.println("11- Imprimir todos os passageiros"); //Feita
 			System.out.println("12- Imprimir todos os motoristas"); //Feita
 			System.out.println("13- Imprimir todos os onibus"); //Feita
@@ -719,7 +765,7 @@ public class Sistema
 					break;
 					
 				case 10:
-				
+					desatribuirOnibus();
 					break;
 
 				case 11:

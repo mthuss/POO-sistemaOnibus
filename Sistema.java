@@ -376,8 +376,6 @@ public class Sistema
           if(!encontrado)
             System.out.println("Rota não encontrada!");
         }
-
-        
     }
 
 	public static void cadastrarMotorista()
@@ -424,10 +422,14 @@ public class Sistema
 		System.out.print("A qual onibus deseja atribuir o motorista?\nPlaca do onibus: ");
 		Scanner sc = new Scanner(System.in);
 		String placa = sc.nextLine();
-		
+		boolean onibusencontrado=false;	
+
 		for(int i = 0; i < onibuses.size(); i++) //Encontra a rota em questão
 			if(onibuses.get(i).getPlaca().equals(placa))
 			{	System.out.println("Encontrado!!");
+				onibusencontrado = true;
+
+				boolean motoristaencontrado = false;
 
 				if(onibuses.get(i).temMotorista())
 					System.out.println("Este ônibus já tem um motorista atribuido");
@@ -438,6 +440,7 @@ public class Sistema
 					long CNH = sc.nextLong();
 					for(int j = 0; j < motoristas.size(); j++) //Encontra o motorista a ser atrelado
 					{
+						motoristaencontrado = true;
 						if(motoristas.get(j).getCNH() == CNH)
 						{
 							if(motoristas.get(j).estaAtribuido())
@@ -452,9 +455,13 @@ public class Sistema
 							}
 						}
 					}
+					if(!motoristaencontrado)
+						System.out.println("Motorista não encontrado");
 				}
 				break;
 			}
+			if(!onibusencontrado)
+				System.out.println("Onibus não encontrado");
 	} 
 	public static void apagarMotorista()
 	{
@@ -609,7 +616,7 @@ public class Sistema
     		System.out.println("4- Cadastrar motorista"); //Feita
 			System.out.println("5- Atribuir motorista ao onibus"); //Feita; precisa testar
 			System.out.println("6- Remover motorista de onibus"); //Feita
-    		System.out.println("7- Excluir motorista"); //Feita, nao testada //LEMBRAR DE METER O FALSE QUANDO REMOVER
+    		System.out.println("7- Excluir motorista"); //Feita, nao testada
     		System.out.println("8- Destruir ônibus (self destruct)");
 			System.out.println("9- Imprimir todos os passageiros");
 			System.out.println("0- Voltar");

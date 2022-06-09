@@ -378,6 +378,51 @@ public class Sistema
         }
     }
 
+	public static void atribuirOnibus()	{
+        Scanner sc = new Scanner(System.in);
+		boolean encontradoOnibus = false;
+
+		System.out.print("Digite a placa do onibus que deseja atrelar: ");
+		String auxPlaca = sc.nextLine();
+
+		for (int i=0; i<onibuses.size(); i++)
+			if (auxPlaca == onibuses.get(i).getPlaca())	{
+				encontradoOnibus = true;
+				Onibus bus = onibuses.get(i);
+
+				System.out.print("Digite o número da rota à qual deseja associar o ônibus: ");
+				sc.nextInt();
+				int ID = sc.nextInt();
+
+				boolean encontradoRotas = false;
+				for(int j = 0; j < rotas.size(); j++) 
+				{
+					if(rotas.get(j).getIDRota() == ID)
+					{
+					encontradoRotas = true;
+					Rotas rota = rotas.get(j);
+					if(rota.getAtribBus()) //fazer um prompt pra perguntar se o cara quer sobrescrever
+					{
+						System.out.println("Esta rota já possui um onibus atribuido"); 
+						return;
+					}
+					rota.setOnibus(bus);
+					bus.setIDRota(ID);
+					rota.setAtribBus(true);
+					bus.setAtribuido(true);
+					if(rotas.get(i).getOnibus() == bus) //confirma que o onibus foi atribuido corretamente
+						System.out.println("Ônibus associado com sucesso à rota " + rotas.get(i).getOrigem() + " - " + rotas.get(i).getDestino() + "!");
+					}
+			
+				}
+			if (!encontradoRotas)
+				System.out.println("Não foi possivel encontrar a rota");
+			}
+		if (!encontradoOnibus)
+			System.out.println("Não foi possivel encontrar onibus");
+
+	}
+
 	public static void cadastrarMotorista()
 	{
 		System.out.println("\nRealize o cadastro do motorista: ");
@@ -440,9 +485,9 @@ public class Sistema
 					long CNH = sc.nextLong();
 					for(int j = 0; j < motoristas.size(); j++) //Encontra o motorista a ser atrelado
 					{
-						motoristaencontrado = true;
 						if(motoristas.get(j).getCNH() == CNH)
 						{
+							motoristaencontrado = true;
 							if(motoristas.get(j).estaAtribuido())
 								System.out.println("Este motorista já está atribuido a um onibus");
 							else
@@ -478,6 +523,8 @@ public class Sistema
 				Motorista driver = motoristas.get(i);
 				driver.setAtribuicao(false);
 				driver.getOnibus().setTemMotorista(false);
+				driver.getOnibus().setDriver(null);
+				driver.setOnibus(null);
 			 	motoristas.remove(driver);
 			}
 		}
@@ -499,6 +546,8 @@ public class Sistema
 				if(motoristas.get(i).estaAtribuido())
 				{
 					motoristas.get(i).getOnibus().setTemMotorista(false);
+					motoristas.get(i).getOnibus().setDriver(null);
+					motoristas.get(i).setOnibus(null);
 					motoristas.get(i).setAtribuicao(false);
 				}
 				else System.out.println("Motorista não está atribuido a nenhum onibus");
@@ -611,20 +660,21 @@ public class Sistema
         do{
 	    	System.out.println("\n\nMenu Admin: ");
     		System.out.println("1- Criar rotas"); //Feita
-    		System.out.println("2- Imprimir Rotas");
+    		System.out.println("2- Imprimir Rotas"); //Feita
     		System.out.println("3- Cadastrar ônibus"); //Feita
-    		System.out.println("4- Cadastrar motorista"); //Feita
-			System.out.println("5- Atribuir motorista ao onibus"); //Feita; precisa testar
-			System.out.println("6- Remover motorista de onibus"); //Feita
-    		System.out.println("7- Excluir motorista"); //Feita, nao testada
-    		System.out.println("8- Destruir ônibus (self destruct)");
-			System.out.println("9- Imprimir todos os passageiros");
+			System.out.println("4- Atribuir ônibus a rota"); 
+    		System.out.println("5- Cadastrar motorista"); //Feita
+			System.out.println("6- Atribuir motorista ao onibus"); //Feita
+			System.out.println("7- Remover motorista de onibus"); //Feita
+    		System.out.println("8- Excluir motorista"); //Feita, nao testada
+    		System.out.println("9- Destruir ônibus (self destruct)"); //Precisa de uma pra remover onibus da rota tbm
+			System.out.println("10- Remover onibus da rota");
+			System.out.println("11- Imprimir todos os passageiros"); //Feita
+			System.out.println("12- Imprimir todos os motoristas"); //Feita
+			System.out.println("13- Imprimir todos os onibus"); //Feita
 			System.out.println("0- Voltar");
 
 			//Fazer uma função pra associar um onibus a uma rota
-			//Função pra mostrar todos os onibus
-			//Fazer uma de imprimir dados dos motoristas
-			//fazer uma de imprimir todos os passageiros e seus dados
             System.out.print("Seleção: ");
             Scanner sc = new Scanner(System.in);
             opt = sc.nextInt();
@@ -644,32 +694,61 @@ public class Sistema
 					break;
 				
 				case 4:
-					cadastrarMotorista();
+					atribuirOnibus();
 					break;
 
 				case 5:
+					cadastrarMotorista();
+					break;
+
+				case 6:
 					atribuirMotorista();
 					break;
 				
-				case 6:
+				case 7:
 					desatribuirMotorista();
 					break;
 
-				case 7:
+				case 8:
 					apagarMotorista();
 					break;
 
-				case 8:
+				case 9:
 					//removerOnibus();
 					System.out.println("Ainda não ta funcionando...");
 					break;
-				case 9:
+					
+				case 10:
+				
+					break;
+
+				case 11:
 					if(passageiros.size() == 0)
 						System.out.println("Não há nenhum passageiro registrado no sistema");
 					else
 					{
 						for(int i = 0; i < passageiros.size(); i++)
 							passageiros.get(i).imprimirDados();
+					}
+					break;
+
+				case 12:
+					if(motoristas.size() == 0)
+						System.out.println("Não há nenhum motorista registrado no sistema");
+					else
+					{
+						for(int i = 0; i < motoristas.size(); i++)
+							motoristas.get(i).imprimirDados();	
+					}
+					break;
+				
+				case 13:
+					if(onibuses.size() == 0)
+						System.out.println("Não há nenhum ônibus registrado no sistema");
+					else
+					{
+						for(int i = 0; i < onibuses.size(); i++)
+							onibuses.get(i).imprimirDados();	
 					}
 					break;
             }

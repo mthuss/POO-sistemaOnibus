@@ -48,6 +48,13 @@ public class Motorista {
         this.buser = bus;
     }
 
+    public void imprimirDados()
+    {
+		System.out.println("Nome: " + this.nome +  " [CNH: " + this.CNH + "]\nData de admissão: " + this.dataAdmissao.imprimirData());
+        String string = estaAtribuido ? "👍" : "👎";  
+        System.out.println("Atribuido a onibus: " + string);
+    }
+
     public Motorista(long CNH, Data dataAdmissao, String nome)    {
         this.CNH = CNH;
         this.dataAdmissao = dataAdmissao;

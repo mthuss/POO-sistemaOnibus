@@ -276,13 +276,13 @@ public class Sistema
 
 		do{
 			System.out.println("\n\nMenu Usuário: ");
-			System.out.println("[1]- Cadastrar usuário"); //Feita
-			System.out.println("[2]- Remover usuário"); //Feita
-			System.out.println("[3]- Mostrar linhas"); //Feita
-			System.out.println("[4]- Reservar passagem"); //Feita
-			System.out.println("[5]- Cancelar passagem"); //Feita
-			System.out.println("[6]- Alterar cadastro"); //Feita
-			System.out.println("[7]- Mostrar Cadastro"); //Feita
+			System.out.println("[1]- Cadastrar usuário"); 
+			System.out.println("[2]- Remover usuário"); 
+			System.out.println("[3]- Mostrar linhas"); 
+			System.out.println("[4]- Reservar passagem"); 
+			System.out.println("[5]- Cancelar passagem"); 
+			System.out.println("[6]- Alterar cadastro"); 
+			System.out.println("[7]- Mostrar Cadastro"); 
 			System.out.println("\n[0]- Voltar");
 			System.out.print("\nSeleção: ");
 
@@ -886,29 +886,29 @@ public class Sistema
         do{
 	    	System.out.println("\n\nMenu Admin: ");
 			System.out.println("\t--Rotas:--");
-    		System.out.println("[1]- Criar rotas"); //Feita
-			System.out.println("[2]- Excluir rota"); //Feita
-    		System.out.println("[3]- Alterar dados da rota"); //Feita
+    		System.out.println("[1]- Criar rotas"); 
+			System.out.println("[2]- Excluir rota"); 
+    		System.out.println("[3]- Alterar dados da rota"); 
 
 			System.out.println("\t--Ônibus:--");
-			System.out.println("[4]- Cadastrar ônibus"); //Feita
-			System.out.println("[5]- Atribuir ônibus a rota"); //Feita
-			System.out.println("[6]- Excluir Onibus"); //Feita
+			System.out.println("[4]- Cadastrar ônibus"); 
+			System.out.println("[5]- Atribuir ônibus a rota"); 
+			System.out.println("[6]- Excluir Onibus"); 
 			System.out.println("[7]- Alterar dados onibus");
-			System.out.println("[8]- Remover onibus da rota"); //Feito
+			System.out.println("[8]- Remover onibus da rota"); 
 
 			System.out.println("\t--Motorista:--");
-    		System.out.println("[9]- Cadastrar motorista"); //Feita
-			System.out.println("[10]- Atribuir motorista ao onibus"); //Feita
-			System.out.println("[11]- Remover motorista de onibus"); //Feita
-    		System.out.println("[12]- Excluir motorista"); //Feita
-			System.out.println("[13]- Alterar dados motorista"); //Feita
+    		System.out.println("[9]- Cadastrar motorista"); 
+			System.out.println("[10]- Atribuir motorista ao onibus"); 
+			System.out.println("[11]- Remover motorista de onibus"); 
+    		System.out.println("[12]- Excluir motorista"); 
+			System.out.println("[13]- Alterar dados motorista"); 
 
 			System.out.println("\t--Mostrar dados:--");
-    		System.out.println("[14]- Imprimir Rotas"); //Feita
-			System.out.println("[15]- Imprimir todos os passageiros"); //Feita
-			System.out.println("[16]- Imprimir todos os motoristas"); //Feita
-			System.out.println("[17]- Imprimir todos os onibus"); //Feita
+    		System.out.println("[14]- Imprimir Rotas"); 
+			System.out.println("[15]- Imprimir todos os passageiros"); 
+			System.out.println("[16]- Imprimir todos os motoristas"); 
+			System.out.println("[17]- Imprimir todos os onibus"); 
 			System.out.println("\n[0]- Voltar");
 
 

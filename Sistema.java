@@ -788,11 +788,14 @@ public class Sistema
 				Onibus bus = onibuses.get(i);	
 				encontrado = true;
 				int ID = bus.getIDRota();
-
+				System.out.println(ID);
 				if(ID < 0 || ID > rotas.size())
 				{
-					System.out.println("Erro!! Rota indisponível!!!\nIsso não deveria ter acontecido!!!!!");
-					return;
+					if(ID != -1)
+					{
+						System.out.println("Erro!! Rota indisponível!!!\nIsso não deveria ter acontecido!!!!!");
+						return;
+					}
 				}
 
 				for(int j = 0; j < passageiros.size(); j++) //Cancela a passagem de todos os passageiros nesse onibus
@@ -801,8 +804,11 @@ public class Sistema
 
 				bus.getDriver().setOnibus(null);
 				bus.getDriver().setAtribuicao(false);
-				rotas.get(ID).setOnibus(null);
-				rotas.get(ID).setAtribBus(false);
+				if(ID != -1)
+				{
+					rotas.get(ID).setOnibus(null);
+					rotas.get(ID).setAtribBus(false);
+				}	
 				onibuses.remove(bus);
 			}
 		
@@ -997,7 +1003,10 @@ public class Sistema
 					else
 					{
 						for(int i = 0; i < onibuses.size(); i++)
+						{
 							onibuses.get(i).imprimirDados();	
+							System.out.println("\n");
+						}
 					}
 					break;
             }

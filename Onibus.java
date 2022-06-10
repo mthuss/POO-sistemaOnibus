@@ -159,7 +159,7 @@ public class Onibus {
       System.out.println("  Ano de Fabricação: " + this.anoFabri);
       System.out.println("  Quilometragem: " + this.quilometragem);
       System.out.println("  Placa: " + this.placa);
-      if(this.IDRota == -1)
+      if(!atribuido)
         System.out.println("  Rota: N/A");
       else
         System.out.println("  Rota: " + this.IDRota);

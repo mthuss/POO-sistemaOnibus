@@ -5,7 +5,6 @@ public class Data {
 
     //getters e setters
 
-  //botar loops pra caso seja invalido
   public int getDia() {
         return dia;
     }

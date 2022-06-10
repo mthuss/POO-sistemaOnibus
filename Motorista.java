@@ -1,5 +1,3 @@
-//Tava duplicada, mals, eu tirei a cópia
-
 public class Motorista {
     private long CNH;
     private Data dataAdmissao;

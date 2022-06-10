@@ -45,7 +45,6 @@ public class Sistema
 	    System.out.print("Endereço: ");
 	    String endereco = sc.nextLine();
 
-//		usuario.dadosPassageiro();
 		Passageiro usuario = new Passageiro(documento,nome,nascData,endereco);
 		passageiros.add(usuario);
 	}
@@ -117,7 +116,7 @@ public class Sistema
 								System.out.println("Esta rota ainda não possui um onibus definido!");
 								break;
 							}
-							System.out.print("Deseja reservar para " + numlinha + " - " + rotas.get(j).getDestino() + "\n[S/N]: ");
+							System.out.print("Deseja reservar para " + numlinha + ": " + rotas.get(j).getOrigem() + " - " + rotas.get(j).getDestino() + "\n[S/N]: ");
 							sc.nextLine();
 							sn = sc.nextLine();
 
@@ -136,7 +135,7 @@ public class Sistema
 
 					if(!encontradoRota)
 					{
-						System.out.println("Rota não entrada!!");
+						System.out.println("Rota não encontrada!!");
 						return;
 					}
 				}  while (sn.contains("n") || sn.contains("N"));  
@@ -152,7 +151,6 @@ public class Sistema
 	public static void cancelarPassagem(long CPF)
 	{
 		boolean encontrado = false;
-//		boolean rotaExiste = false; //Pra caso a rota a qual a pessoa estava atrelada tiver sido deletada
 
 		for(int i = 0; i < passageiros.size(); i++) //Encontrar o passageiro que quer cancelar a passagem
 			if(passageiros.get(i).getDocumento() == CPF)
@@ -165,11 +163,9 @@ public class Sistema
 					int ID = pessoa.getLinha();
 					int pos[] = pessoa.getAssento();
 					pessoa.setLinha(-1); //Desvincula linha da pessoa
-					//System.out.println(pos[0] + "\n" + pos[1]);
 					for(int j = 0; j < rotas.size(); j++)	//Encontra o onibus da rota do passageiro
 						if(rotas.get(j).getIDRota() == ID)
 						{
-							//rotaExiste = true;
 							rotas.get(j).getOnibus().cancelarAssento(pos[0],pos[1]);
 							pessoa.setReservado(false);
 							break;
@@ -200,7 +196,7 @@ public class Sistema
 				{
 					temRota = true;
 					rota = rotas.get(i);
-	                System.out.println(rota.getIDRota() + ": " + rota.getOrigem() + " - " + rota.getDestino());
+	                System.out.println("Rota " + rota.getIDRota() + ": " + rota.getOrigem() + " - " + rota.getDestino());
 					System.out.println("Saída: " + rota.getHoraSaida().imprimirHorario() + "\nChegada: " + rota.getHoraChegada().imprimirHorario());
 					System.out.printf("Preço: R$%.02f", rota.getValor());
 				}
@@ -266,9 +262,10 @@ public class Sistema
 		}
 	
 		if(!encontrado) {
-			
 			System.out.println("Cadastro não encontrado!");
+			return;
 		}
+		System.out.println("Cadastro atualizado.");
 	}
 
 
@@ -281,7 +278,7 @@ public class Sistema
 			System.out.println("\n\nMenu Usuário: ");
 			System.out.println("[1]- Cadastrar usuário"); //Feita
 			System.out.println("[2]- Remover usuário"); //Feita
-			System.out.println("[3]- Mostrar linhas"); //Feita*; falta botar horarios (problema!!!)
+			System.out.println("[3]- Mostrar linhas"); //Feita
 			System.out.println("[4]- Reservar passagem"); //Feita
 			System.out.println("[5]- Cancelar passagem"); //Feita
 			System.out.println("[6]- Alterar cadastro"); //Feita
@@ -345,7 +342,6 @@ public class Sistema
 
 
 		}while(opt != 0);
-//		passageiros.get(0).imprimirDados();
 	}
 
 
@@ -356,7 +352,7 @@ public class Sistema
         Onibus bus = new Onibus();
         bus.dadosOnibus();
 		onibuses.add(bus);
-        System.out.print("Deseja associá-lo a alguma rota? (S/N): "); //Dar uma revisada nisso depois, pra ver se ta linkando os dois do jeito certo
+        System.out.print("Deseja associá-lo a alguma rota? (S/N): "); 
         Scanner sc = new Scanner(System.in);
         String sn = sc.nextLine();
 
@@ -418,7 +414,7 @@ public class Sistema
 					{
 					encontradoRotas = true;
 					Rotas rota = rotas.get(j);
-					if(rota.getAtribBus()) //fazer um prompt pra perguntar se o cara quer sobrescrever
+					if(rota.getAtribBus()) 
 					{
 						System.out.println("Esta rota já possui um onibus atribuido"); 
 						return;
@@ -474,10 +470,9 @@ public class Sistema
 	    Data admissao = new Data(D,M,A);
 	    sc.nextLine();
 
-//		usuario.dadosPassageiro();
 		Motorista motorista = new Motorista(CNH,admissao,nome);
 		motoristas.add(motorista);
-
+		System.out.println("Motorista cadastrado.");
 	}
 
 //-----------------------------------------------------------------------------
@@ -488,7 +483,7 @@ public class Sistema
 		String placa = sc.nextLine();
 		boolean onibusencontrado=false;	
 
-		for(int i = 0; i < onibuses.size(); i++) //Encontra a rota em questão
+		for(int i = 0; i < onibuses.size(); i++) //Encontra a placa do onibus em questão
 			if(onibuses.get(i).getPlaca().equals(placa))
 			{	System.out.println("Encontrado!!");
 				onibusencontrado = true;
@@ -514,7 +509,7 @@ public class Sistema
 								onibuses.get(i).setDriver(motoristas.get(j));
 								motoristas.get(j).setOnibus(onibuses.get(i));
 								onibuses.get(i).getDriver().setAtribuicao(true);
-								onibuses.get(i).setTemMotorista(true); //LEMBRAR DE METER O FALSE QUANDO REMOVER
+								onibuses.get(i).setTemMotorista(true); 
 								System.out.println("Motorista atribuido com sucesso!");
 							}
 						}
@@ -542,11 +537,15 @@ public class Sistema
 				System.out.println("Motorista encontrado!");
 				 encontrado = true;
 				Motorista driver = motoristas.get(i);
+				if(driver.estaAtribuido())
+				{
+					driver.getOnibus().setTemMotorista(false);
+					driver.getOnibus().setDriver(null);
+				}
 				driver.setAtribuicao(false);
-				driver.getOnibus().setTemMotorista(false);
-				driver.getOnibus().setDriver(null);
 				driver.setOnibus(null);
 			 	motoristas.remove(driver);
+				System.out.println("Motorista removido.");
 			}
 		}
 		if(!encontrado)
@@ -571,6 +570,7 @@ public class Sistema
 					motoristas.get(i).getOnibus().setDriver(null);
 					motoristas.get(i).setOnibus(null);
 					motoristas.get(i).setAtribuicao(false);
+					System.out.println("Motorista desatribuido");
 				}
 				else System.out.println("Motorista não está atribuido a nenhum onibus");
 			}
@@ -584,18 +584,9 @@ public class Sistema
 //-----------------------------------------------------------------------------
 	public static void criarRota()	{
 		Scanner sc = new Scanner(System.in);
-//		System.out.print("Digite o ID da rota: ");
-//		int auxID = sc.nextInt();
 		int auxID = rotas.size();
-//		for(int i = 0; i < rotas.size(); i++)	{
-//			if(rotas.get(i).getIDRota() == auxID) {
-//				System.out.println("Esse ID já foi cadastrado!");
-//				return;
-//			}
-//		}
 
 		System.out.print("Digite a cidade origem: ");
-//		sc.nextLine();
 		String auxOrigem = 	sc.nextLine();
 
 		System.out.print("Digite a parada: ");
@@ -606,15 +597,15 @@ public class Sistema
 
 		int PHour, PMinutes;
 		do {
-			System.out.println("Horario de partida");
-			System.out.print("Digite a hora de saida: ");
+			System.out.println("\nHorario de partida");
+			System.out.print("  Digite a hora de saida: ");
 			PHour = sc.nextInt();
 			if (PHour < 0 || PHour > 24)
 				System.out.println("Horário de saida inválido");
 		} while (PHour < 0 || PHour > 24);
 
 		do {
-			System.out.print("Digite os minutos de saida: ");
+			System.out.print("  Digite os minutos de saida: ");
 			PMinutes = sc.nextInt();
 			if (PMinutes < 0 || PMinutes > 60)
 				System.out.println("Horário de saida inválido");
@@ -625,15 +616,15 @@ public class Sistema
 		int CHour, CMinutes;
 		do {
 			System.out.println("Horarios de chegada");
-			System.out.println("[Caso o horário de chegada seja menor ou igual ao de saída, entende-se que será do dia seguinte]");
-			System.out.print("Digite a hora de chegada: ");
+			System.out.println("[Caso este seja menor ou igual ao de saída, entende-se que será do dia seguinte]");
+			System.out.print("  Digite a hora de chegada: ");
 			CHour = sc.nextInt();
 			if (CHour < 0 || CHour > 24)
 				System.out.println("Horário de chegada inválido");
 		} while (CHour < 0 || CHour > 24);
 
 		do {
-			System.out.print("Digite os minutos de chegada: ");
+			System.out.print("  Digite os minutos de chegada: ");
 			CMinutes = sc.nextInt();
 			if (CMinutes < 0 || CMinutes > 60)
 					System.out.println("Horário de chegada inválido");
@@ -641,11 +632,12 @@ public class Sistema
 
 		Horario Hchegada = new Horario (CHour, CMinutes);
 
-		System.out.print("Digite o preço dessa passagem: ");
+		System.out.print("\nDigite o preço dessa passagem: ");
 		float auxPreco = sc.nextFloat();
 
 		Rotas rota = new Rotas(auxOrigem, auxParada, auxDestino, Hpartida, Hchegada, auxPreco, auxID);
 		rotas.add(rota);
+		System.out.println("Rota adicionada.");
 	}
 	
 //-----------------------------------------------------------------------------
@@ -702,7 +694,7 @@ public class Sistema
 		}
 		rotas.remove(rota);
 
-		for(int i = 0; i< rotas.size(); i++) //Atualiaza o ID das rotas
+		for(int i = 0; i< rotas.size(); i++) //Atualiza o ID das rotas
 			rotas.get(i).setIDRota(i);
 	}
 
@@ -753,24 +745,29 @@ public class Sistema
 		boolean encontradoOnibus = false;
 
 		for (int j=0; j<onibuses.size(); j++){
-			if (onibuses.get(j).getPlaca().equals(auxPlaca)){
+			if (onibuses.get(j).getPlaca().equals(auxPlaca))
+			{
 				encontradoOnibus = true;
-				int auxID = onibuses.get(j).getIDRota();
-				System.out.println(auxID);
-				if (auxID >= 0 && auxID < rotas.size())	{
-					Rotas rota = rotas.get(auxID);
+				if(onibuses.get(j).atribuidoRota())
+				{
+					int auxID = onibuses.get(j).getIDRota();
+					if (auxID >= 0 && auxID < rotas.size())	
+					{
+						Rotas rota = rotas.get(auxID);
 
-					for(int i = 0; i < passageiros.size(); i++)
-						if(passageiros.get(i).getLinha() == auxID)
-							cancelarPassagem(passageiros.get(i).getDocumento());
+						for(int i = 0; i < passageiros.size(); i++)
+							if(passageiros.get(i).getLinha() == auxID)
+								cancelarPassagem(passageiros.get(i).getDocumento());
 
-					rota.getOnibus().setIDRota(-1);
-					rota.getOnibus().setAtribuido(false);
-					rota.setOnibus(null);
-					rota.setAtribBus(false);
-					System.out.println("Ônibus desatribuido com sucesso");
+						rota.getOnibus().setIDRota(-1);
+						rota.getOnibus().setAtribuido(false);
+						rota.setOnibus(null);
+						rota.setAtribBus(false);
+						System.out.println("Ônibus desatribuido com sucesso");
+					}
+					else System.out.println("ID inválido!!!");
 				}
-				else System.out.println("ID inválido!!!");
+				else System.out.println("Este onibus não está atribuido a uma rota");
 			}
 		}
 	}
@@ -890,13 +887,13 @@ public class Sistema
 	    	System.out.println("\n\nMenu Admin: ");
 			System.out.println("\t--Rotas:--");
     		System.out.println("[1]- Criar rotas"); //Feita
-			System.out.println("[2]- Excluir rota"); //Feita, falta testar
-    		System.out.println("[3]- Alterar dados da rota"); //Feita, falta testar
+			System.out.println("[2]- Excluir rota"); //Feita
+    		System.out.println("[3]- Alterar dados da rota"); //Feita
 
 			System.out.println("\t--Ônibus:--");
 			System.out.println("[4]- Cadastrar ônibus"); //Feita
 			System.out.println("[5]- Atribuir ônibus a rota"); //Feita
-			System.out.println("[6]- Excluir Onibus"); //Feita, falta testar
+			System.out.println("[6]- Excluir Onibus"); //Feita
 			System.out.println("[7]- Alterar dados onibus");
 			System.out.println("[8]- Remover onibus da rota"); //Feito
 
@@ -904,8 +901,8 @@ public class Sistema
     		System.out.println("[9]- Cadastrar motorista"); //Feita
 			System.out.println("[10]- Atribuir motorista ao onibus"); //Feita
 			System.out.println("[11]- Remover motorista de onibus"); //Feita
-    		System.out.println("[12]- Excluir motorista"); //Feita, nao testada
-			System.out.println("[13]- Alterar dados motorista"); //Feita, falta testar
+    		System.out.println("[12]- Excluir motorista"); //Feita
+			System.out.println("[13]- Alterar dados motorista"); //Feita
 
 			System.out.println("\t--Mostrar dados:--");
     		System.out.println("[14]- Imprimir Rotas"); //Feita
@@ -1013,9 +1010,4 @@ public class Sistema
         }while(opt != 0);
 	}
 
-/*
-    ArrayList<Rotas> getRotas(){
-        return this.rotas;
-    }
-*/
 }

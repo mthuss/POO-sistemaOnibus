@@ -12,15 +12,6 @@ public class Main {
 
 		Sistema registro = new Sistema();
 
-	//	Rotas SaintDeoclecian = new Rotas(); //instanciada para fins de teste
-		//SaintDeoclecian.setIDRota(107);
-//		SaintDeoclecian.setDestino("Sao Deocleciano");
-	//	registro.getRotas().add(SaintDeoclecian);
-//		Onibus viacao = new Onibus("viadao esteroide",2002,"passaro marrom",100);
-//		SaintDeoclecian.setOnibus(viacao);
-//		SaintDeoclecian.setAtribBus(true);
-		//System.out.println(registro.getRotas().get(0).getDestino());
-
 		do  { 
 			System.out.println("\nDigite o tipo de usuário:");
 			System.out.println("1- Passageiro");
@@ -41,23 +32,5 @@ public class Main {
 
 
 		System.out.println("Obrigado por utilizar :)");
-		// System.out.print(registro.passageiros);
-
-		  /*    SaintDeoclecian.reservarAssento();
-
-		      SaintDeoclecian.imprimeMatriz();
-
-		      SaintDeoclecian.reservarAssento();
-
-		      SaintDeoclecian.imprimeMatriz();
-		 */
-
-
 	}
-
-
-
-
 }
-//teste
-//teste 2

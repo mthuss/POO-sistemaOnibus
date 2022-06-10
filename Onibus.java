@@ -7,11 +7,8 @@ public class Onibus {
     private String marca;
     private int quilometragem;
     private int assentos[][] = new int[10][3];
-//    private ArrayList<Rotas> rotasCirculadas = new ArrayList<>(); //rotas que o onibus percorre
- //   private ArrayList<Passageiro> passageiros = new ArrayList<>();
     private Motorista driver;
     private int IDRota;
-//    private Rotas rota = new Rotas();
     private String placa;
     boolean temMotorista = false;
     boolean atribuido = false;
@@ -87,14 +84,6 @@ public class Onibus {
       return this.atribuido;
     }
 
-//    public void setRota(Rotas rota)
-//    {
-//      this.rota = rota;
-//    }
-//    public Rotas getRota(Rotas rota)
-//    {
-//      return this.rota;
-//    }
 //Métodos
 //------------------------------------------------------
   public void imprimeAssentos()  {

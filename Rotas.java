@@ -5,16 +5,14 @@ public class Rotas {
     private String origem;
     private String parada;
     private String destino;
-    private Horario saida; //MENOR QUE A CHEGADA
-    private Horario chegada; //MAIOR QUE A SAIDA
+    private Horario saida; 
+    private Horario chegada; 
     private float valor;
     private int numRota;
     private boolean onibusAtribuido = false;
     
-//    private ArrayList<Onibus> busos = new ArrayList<>(); //VAI SER UM SÓ
 
-//    private Onibus onibus = new Onibus(); //Nota: PRECISA SER ASSIM!!
-    private Onibus onibus; //E NÃO ASSIM!!
+    private Onibus onibus; 
     
     public String getOrigem() {
         return origem;
@@ -80,10 +78,6 @@ public class Rotas {
         return this.onibusAtribuido;
     }
 
-//    public ArrayList<Onibus> getArrOnibus()
-//    {
-//        return this.busos;
-//    }
 
   //construtores
     public Rotas(String origem, String parada, String destino, Horario saida, Horario chegada, float valor, int numRota)  {

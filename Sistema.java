@@ -401,10 +401,13 @@ public class Sistema
 		String auxPlaca = sc.nextLine();
 
 		for (int i=0; i<onibuses.size(); i++)
-			if (onibuses.get(i).getPlaca().contains(auxPlaca))	{
+			if (onibuses.get(i).getPlaca().equals(auxPlaca))	{
 				encontradoOnibus = true;
 				Onibus bus = onibuses.get(i);
-
+				if(bus.atribuidoRota())
+				{
+					System.out.println("Este ônibus já está atribuido a uma rota");
+				}
 				System.out.print("Digite o número da rota à qual deseja associar o ônibus: ");
 				int ID = sc.nextInt();
 
@@ -692,10 +695,15 @@ public class Sistema
 		for(int i = 0; i < passageiros.size(); i++)
 			if(passageiros.get(i).getLinha() == ID)
 				cancelarPassagem(passageiros.get(i).getDocumento());
-
-		rota.getOnibus().setIDRota(-1);
-		rota.getOnibus().setAtribuido(false);
+		if(rota.getAtribBus())
+		{
+			rota.getOnibus().setIDRota(-1);
+			rota.getOnibus().setAtribuido(false);
+		}
 		rotas.remove(rota);
+
+		for(int i = 0; i< rotas.size(); i++) //Atualiaza o ID das rotas
+			rotas.get(i).setIDRota(i);
 	}
 
 //-----------------------------------------------------------------------------
@@ -745,12 +753,11 @@ public class Sistema
 		boolean encontradoOnibus = false;
 
 		for (int j=0; j<onibuses.size(); j++){
-			if (auxPlaca == onibuses.get(j).getPlaca())	{
+			if (onibuses.get(j).getPlaca().equals(auxPlaca)){
 				encontradoOnibus = true;
-				System.out.print("Digite o ID da rota que deseja desatribuir: ");
-				sc.nextInt();
-				int auxID = sc.nextInt();
-				if (auxID > 0 && auxID < rotas.size())	{
+				int auxID = onibuses.get(j).getIDRota();
+				System.out.println(auxID);
+				if (auxID >= 0 && auxID < rotas.size())	{
 					Rotas rota = rotas.get(auxID);
 
 					for(int i = 0; i < passageiros.size(); i++)
@@ -761,6 +768,7 @@ public class Sistema
 					rota.getOnibus().setAtribuido(false);
 					rota.setOnibus(null);
 					rota.setAtribBus(false);
+					System.out.println("Ônibus desatribuido com sucesso");
 				}
 				else System.out.println("ID inválido!!!");
 			}
@@ -776,7 +784,7 @@ public class Sistema
 		boolean encontrado = false;
 
 		for (int i=0; i<onibuses.size(); i++)
-			if (auxPlaca == onibuses.get(i).getPlaca())	{
+			if (onibuses.get(i).getPlaca().equals(auxPlaca))	{
 				Onibus bus = onibuses.get(i);	
 				encontrado = true;
 				int ID = bus.getIDRota();
@@ -810,7 +818,7 @@ public class Sistema
 		String placa = sc.nextLine();
 		
 		for(int i = 0; i < onibuses.size(); i++)
-			if(onibuses.get(i).getPlaca().contains(placa))
+			if(onibuses.get(i).getPlaca().equals(placa))
 			{
 				System.out.println("Realize novamente o cadastro do ônibus");
 				onibuses.get(i).dadosOnibus();

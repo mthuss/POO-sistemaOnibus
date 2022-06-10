@@ -1,4 +1,4 @@
-//Bruno ajudou também 👍
+//Feito por Bruno Silveira e Matheus Moriel 👍
 import java.util.Scanner;
 import java.util.ArrayList;
 

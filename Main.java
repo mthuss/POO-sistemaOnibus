@@ -40,6 +40,7 @@ public class Main {
 		}while(opt != 3);
 
 
+		System.out.println("Obrigado por utilizar :)");
 		// System.out.print(registro.passageiros);
 
 		  /*    SaintDeoclecian.reservarAssento();

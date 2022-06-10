@@ -90,7 +90,9 @@ public class Passageiro {
     if(reservado)
     {
       System.out.println(this.numLinha);
-      System.out.println("Local do assento: " + assento[0]+1 + " " + assento[1]+1);
+      int i = assento[0] + 1;
+      int j = assento[1] + 1;
+      System.out.printf("Local do assento: %d %d",(assento[0]),(assento[1]));
     }
     else System.out.println("N/A");
 

@@ -994,7 +994,6 @@ public class Sistema
 					break;
             }
         }while(opt != 0);
-	System.out.println("Obrigado por utilizar :)");
 	}
 
 /*

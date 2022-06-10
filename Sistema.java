@@ -82,6 +82,7 @@ public class Sistema
 		System.out.print("Digite seu CPF: ");
 		long CPF = sc.nextLong();	
 		boolean encontrado=false;
+		boolean encontradoRota=false;
 
 		//Verifica se o CPF digitado está, de fato, cadastrado
 		//e reserva a linha pedida
@@ -101,13 +102,13 @@ public class Sistema
 				int numlinha;	
 
 				do{  //laço de verificação "deseja reservar MESMO essa linha?"
-					System.out.print("Deseja reservar qual ônibus?\nDigite o número da linha\n[0 para cancelar]\n\nLinha: ");
+					System.out.print("Deseja reservar qual ônibus?\nDigite o número da linha\n\nLinha: ");
 					numlinha = sc.nextInt(); //Lê o numero da linha a ser reservada
-					if(numlinha == 0)
-						break;
+
 					for(j = 0; j < rotas.size(); j++)
 						if(rotas.get(j).getIDRota() == numlinha)
 						{
+							encontradoRota = true;
 							Onibus bus = rotas.get(j).getOnibus();
 							System.out.println("\nLinha encontrada\n");
 
@@ -130,8 +131,14 @@ public class Sistema
 								System.out.println("Linha definida");
 								break;
 							}
-
 						}
+						else encontradoRota = false;
+
+					if(!encontradoRota)
+					{
+						System.out.println("Rota não entrada!!");
+						return;
+					}
 				}  while (sn.contains("n") || sn.contains("N"));  
 			}
 
@@ -195,7 +202,7 @@ public class Sistema
 					rota = rotas.get(i);
 	                System.out.println(rota.getIDRota() + ": " + rota.getOrigem() + " - " + rota.getDestino());
 					System.out.println("Saída: " + rota.getHoraSaida().imprimirHorario() + "\nChegada: " + rota.getHoraChegada().imprimirHorario());
-					System.out.println("Preço: " + rota.getValor());
+					System.out.printf("Preço: R$%.02f", rota.getValor());
 				}
 			}
 			if(!temRota)
@@ -272,14 +279,14 @@ public class Sistema
 
 		do{
 			System.out.println("\n\nMenu Usuário: ");
-			System.out.println("1- Cadastrar usuário"); //Feita
-			System.out.println("2- Remover usuário"); //Feita
-			System.out.println("3- Mostrar linhas"); //Feita*; falta botar horarios (problema!!!)
-			System.out.println("4- Reservar passagem"); //Feita
-			System.out.println("5- Cancelar passagem"); //Feita
-			System.out.println("6- Alterar cadastro"); //Feita
-			System.out.println("7- Mostrar Cadastro"); //Feita
-			System.out.println("0- Voltar");
+			System.out.println("[1]- Cadastrar usuário"); //Feita
+			System.out.println("[2]- Remover usuário"); //Feita
+			System.out.println("[3]- Mostrar linhas"); //Feita*; falta botar horarios (problema!!!)
+			System.out.println("[4]- Reservar passagem"); //Feita
+			System.out.println("[5]- Cancelar passagem"); //Feita
+			System.out.println("[6]- Alterar cadastro"); //Feita
+			System.out.println("[7]- Mostrar Cadastro"); //Feita
+			System.out.println("\n[0]- Voltar");
 			System.out.print("\nSeleção: ");
 
 			Scanner sc = new Scanner(System.in);
@@ -394,12 +401,11 @@ public class Sistema
 		String auxPlaca = sc.nextLine();
 
 		for (int i=0; i<onibuses.size(); i++)
-			if (auxPlaca == onibuses.get(i).getPlaca())	{
+			if (onibuses.get(i).getPlaca().contains(auxPlaca))	{
 				encontradoOnibus = true;
 				Onibus bus = onibuses.get(i);
 
 				System.out.print("Digite o número da rota à qual deseja associar o ônibus: ");
-				sc.nextInt();
 				int ID = sc.nextInt();
 
 				boolean encontradoRotas = false;
@@ -598,7 +604,7 @@ public class Sistema
 		int PHour, PMinutes;
 		do {
 			System.out.println("Horario de partida");
-			System.out.print("Digite o horario de saida: ");
+			System.out.print("Digite a hora de saida: ");
 			PHour = sc.nextInt();
 			if (PHour < 0 || PHour > 24)
 				System.out.println("Horário de saida inválido");
@@ -617,7 +623,7 @@ public class Sistema
 		do {
 			System.out.println("Horarios de chegada");
 			System.out.println("[Caso o horário de chegada seja menor ou igual ao de saída, entende-se que será do dia seguinte]");
-			System.out.print("Digite o horario de chegada: ");
+			System.out.print("Digite a hora de chegada: ");
 			CHour = sc.nextInt();
 			if (CHour < 0 || CHour > 24)
 				System.out.println("Horário de chegada inválido");
@@ -650,12 +656,13 @@ public class Sistema
             for(int i = 0; i < rotas.size(); i++)
 			{
 				rota = rotas.get(i);
-                System.out.println("Rota " + rota.getIDRota() + ": " + rota.getOrigem() + " - " + rota.getDestino());
+                System.out.println("\n\nRota " + rota.getIDRota() + ": " + rota.getOrigem() + " - " + rota.getDestino());
 				System.out.println("Parada: " + rota.getParada());
 				System.out.println("Saída: " + rota.getHoraSaida().imprimirHorario() + "\nChegada: " + rota.getHoraChegada().imprimirHorario());
 				System.out.printf("Preço: R$%.2f\n", rota.getValor());
 				if(rota.getAtribBus())
 				{
+					System.out.println("Onibus: ");
 					rota.getOnibus().imprimirDados();
 					
 					if(motoristas.size() != 0 && rota.getOnibus().temMotorista()) { //teoricamente não precisa do motoristas.size(). Só pra garantir kk
@@ -695,8 +702,8 @@ public class Sistema
 	public static void alterarDadosRota()	
 	{
 		Scanner sc = new Scanner(System.in);
-		
-		System.out.print("Digite o ID da rota que deseja alterar");
+
+		System.out.print("Digite o ID da rota que deseja alterar: ");
 		int auxID = sc.nextInt();
 
 		if (auxID < 0 || auxID > rotas.size())	{
@@ -704,18 +711,30 @@ public class Sistema
 			return;
 		}
 
-		System.out.print("Digite o horário de partida: ");
+		System.out.print("Digite a nova hora de partida: ");
 		int hSaida = sc.nextInt();
-		System.out.print("Digite os minutos de saida: ");
+		System.out.print("Digite os novos minutos de partida: ");
 		int mSaida = sc.nextInt(); 
+		Horario auxSaida = new Horario(hSaida, mSaida);
 	
-		
+		rotas.get(auxID).setHoraSaida(auxSaida);
 
-		System.out.print("Digite o horário de chegada: ");
+		System.out.print("Digite a nova hora de chegada: ");
 		int hChegada = sc.nextInt();
-		System.out.print("Digite os minutos de chegada: ");
+		System.out.print("Digite os novos minutos de chegada: ");
 		int mChegada = sc.nextInt();
+		Horario auxChegada = new Horario(hChegada, mChegada);
 		
+		rotas.get(auxID).setHoraChegada(auxChegada);
+
+		System.out.print("Digite o valor da viagem: ");
+		float auxPreco = sc.nextFloat();
+		rotas.get(auxID).setValor(auxPreco);
+
+		System.out.println("Rota [" + rotas.get(auxID).getOrigem() + "] -> [" + rotas.get(auxID).getDestino() + "]");
+		System.out.println("Novos parametros:\n\tHorario saida: " + rotas.get(auxID).getHoraSaida().imprimirHorario());
+		System.out.println("\t\n\tHorario chegada: " + rotas.get(auxID).getHoraChegada().imprimirHorario());
+		System.out.println("\tPreço: " + rotas.get(auxID).getValor() + "R$");
 	}
 
 //-----------------------------------------------------------------------------
@@ -777,41 +796,111 @@ public class Sistema
 				rotas.get(ID).setOnibus(null);
 				rotas.get(ID).setAtribBus(false);
 				onibuses.remove(bus);
-				
-				
 			}
+		
+		if(!encontrado)
+			System.out.println("Ônibus não encontrado");
 		
 	}
 
+//----------------------------------------------------------------------------
+	public static void alterarDadosOnibus()	{
+		System.out.println("Digite a placa do ônibus");
+		Scanner sc = new Scanner(System.in);
+		String placa = sc.nextLine();
+		
+		for(int i = 0; i < onibuses.size(); i++)
+			if(onibuses.get(i).getPlaca().contains(placa))
+			{
+				System.out.println("Realize novamente o cadastro do ônibus");
+				onibuses.get(i).dadosOnibus();
+			}	
+	}
+//----------------------------------------------------------------------------
+	public static void alterarDadosMotorista()
+	{
+		System.out.print("Digite o CPF de quem deseja alterar: ");
+		Scanner sc = new Scanner(System.in);
+		boolean encontrado = false;
+		long CNH = sc.nextLong();
+		int opt;
+
+		for(int i = 0; i < motoristas.size(); i++)	{
+			if(motoristas.get(i).getCNH() == CNH) {
+				Motorista motorista = motoristas.get(i);
+				encontrado = true;
+				System.out.println("Cadastro encontrado!!\n");
+
+				do	{
+					System.out.println("\nQue dado deseja alterar?");
+					System.out.println("1- Alterar nome");
+					System.out.println("2- Alterar data de admissão");
+					System.out.print("Comando: ");
+					opt = sc.nextInt();
+				
+					switch(opt)	{
+						case 1: System.out.print("Digite o nome: ");
+								sc.nextLine();
+								String nome = sc.nextLine();
+								motorista.setNome(nome);
+								break;
+
+						case 2: System.out.print("\nDigite a nova data de admissão: \nDia: ");
+								int D,M,A;
+								D = sc.nextInt();
+								System.out.print("Mês: ");
+								M = sc.nextInt();
+								System.out.print("Ano: ");
+								A = sc.nextInt();
+								Data nascData = new Data(D,M,A);
+								sc.nextLine();
+								motorista.setDataAdmissao(nascData);
+								break;
+
+						default: System.out.println("Valor invalido!\n"); break; 
+					}
+				} while (opt < 1 || opt > 2);
+			}
+		}
+	
+		if(!encontrado) {
+			
+			System.out.println("Cadastro não encontrado!");
+		}
+
+	}
 //----------------------------------------------------------------------------
 	public static void menuADM()  {
         int opt;
         do{
 	    	System.out.println("\n\nMenu Admin: ");
-    		System.out.println("1- Criar rotas"); //Feita
-    		System.out.println("2- Imprimir Rotas"); //Feita
-			System.out.println("3- Excluir rota"); //Feita, tem q testar
-    		System.out.println("4- Alterar dados da rota");
+			System.out.println("\t--Rotas:--");
+    		System.out.println("[1]- Criar rotas"); //Feita
+			System.out.println("[2]- Excluir rota"); //Feita, falta testar
+    		System.out.println("[3]- Alterar dados da rota"); //Feita, falta testar
 
-			System.out.println("5- Cadastrar ônibus"); //Feita
-			System.out.println("6- Atribuir ônibus a rota"); //Feita
-			System.out.println("7- Excluir Onibus");
-			System.out.println("8- Alterar dados onibus");
+			System.out.println("\t--Ônibus:--");
+			System.out.println("[4]- Cadastrar ônibus"); //Feita
+			System.out.println("[5]- Atribuir ônibus a rota"); //Feita
+			System.out.println("[6]- Excluir Onibus"); //Feita, falta testar
+			System.out.println("[7]- Alterar dados onibus");
+			System.out.println("[8]- Remover onibus da rota"); //Feito
 
-    		System.out.println("9- Cadastrar motorista"); //Feita
-			System.out.println("10- Atribuir motorista ao onibus"); //Feita
-			System.out.println("11- Remover motorista de onibus"); //Feita
-    		System.out.println("12- Excluir motorista"); //Feita, nao testada
-			System.out.println("13- Alterar dados motorista");
+			System.out.println("\t--Motorista:--");
+    		System.out.println("[9]- Cadastrar motorista"); //Feita
+			System.out.println("[10]- Atribuir motorista ao onibus"); //Feita
+			System.out.println("[11]- Remover motorista de onibus"); //Feita
+    		System.out.println("[12]- Excluir motorista"); //Feita, nao testada
+			System.out.println("[13]- Alterar dados motorista"); //Feita, falta testar
 
-			System.out.println("14- Remover onibus da rota"); //Feito
-			System.out.println("15- Imprimir todos os passageiros"); //Feita
-			System.out.println("16- Imprimir todos os motoristas"); //Feita
-			System.out.println("17- Imprimir todos os onibus"); //Feita
-			System.out.println("0- Voltar");
+			System.out.println("\t--Mostrar dados:--");
+    		System.out.println("[14]- Imprimir Rotas"); //Feita
+			System.out.println("[15]- Imprimir todos os passageiros"); //Feita
+			System.out.println("[16]- Imprimir todos os motoristas"); //Feita
+			System.out.println("[17]- Imprimir todos os onibus"); //Feita
+			System.out.println("\n[0]- Voltar");
 
-			//Falta as de alterar, apenas
-			//Excluir onibus
+
             System.out.print("Seleção: ");
             Scanner sc = new Scanner(System.in);
             opt = sc.nextInt();
@@ -823,36 +912,36 @@ public class Sistema
 					break;
 
 				case 2:
-					imprimirRotasADM();
-					break;
-
-				case 3:
 					apagarRota();
 					break;
 
-				case 4:
+				case 3:
 					alterarDadosRota();
 					break;
 
-				case 5:
+				case 4:
                     cadastrarOnibus();
 					break;
 				
-				case 6:
+				case 5:
 					atribuirOnibus();
 					break;
 
-				case 7:
+				case 6:
 					apagarOnibus();
 					break;
 
-				case 8: 
+				case 7:
+					alterarDadosOnibus();
+					break;
+
+				case 8:
+					desatribuirOnibus();
 					break;
 
 				case 9:
 					cadastrarMotorista();
 					break;
-
 
 				case 10:
 					atribuirMotorista();
@@ -867,11 +956,11 @@ public class Sistema
 					break;
 
 				case 13:
-
+					alterarDadosMotorista();
 					break;
 
 				case 14:
-					desatribuirOnibus();
+					imprimirRotasADM();
 					break;
 
 				case 15:
@@ -905,8 +994,8 @@ public class Sistema
 					break;
             }
         }while(opt != 0);
+	System.out.println("Obrigado por utilizar :)");
 	}
-
 
 /*
     ArrayList<Rotas> getRotas(){

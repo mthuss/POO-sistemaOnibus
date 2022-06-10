@@ -154,7 +154,6 @@ public class Onibus {
 
     public void imprimirDados()
     {
-      System.out.println("Ônibus: ");
       System.out.println("  Modelo: " + this.modelo);
       System.out.println("  Marca: " + this.marca);
       System.out.println("  Ano de Fabricação: " + this.anoFabri);
